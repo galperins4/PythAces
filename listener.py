@@ -66,9 +66,10 @@ if __name__ == '__main__':
                         #mark as processed
                         acesdb.markAsProcessed(c[0])
                     else:
-                        print("no match")
+                        pass
                  
                 #update list_start based on last timestamp
+                print(transactions[-1])
                 listen_start = transactions[-1][1]
                 print("updated ts:", listen_start)
                 
