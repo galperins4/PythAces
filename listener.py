@@ -49,9 +49,6 @@ if __name__ == '__main__':
           
         # query not empty means unprocessed contracts
         if unprocessed:
-            print(int(time.time()))
-            print(data['network_a_epoch'])
-            quit()
             listen_start = int(time.time()) - data['network_a_epoch']
             print("initial ts:", listen_start)
             for c in unprocessed:
