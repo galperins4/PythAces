@@ -14,7 +14,7 @@ class DB:
 
     def listen_transactions(self, ts):
         try:
-            self.cursor.execute(f"""SELECT "id","senderId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "timestamp" > {ts} ORDER BY "rowId" DESC""")
+            self.cursor.execute(f"""SELECT "id","senderId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "rowId" > {row} ORDER BY "rowId" DESC""")
             return self.cursor.fetchall()
         except Exception as e:
             print(e)	    
