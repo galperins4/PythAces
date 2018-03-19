@@ -45,7 +45,7 @@ if __name__ == '__main__':
     
     # get input from front end 
     # currently will do manually until front end is built for testing
-    new_contract = (contract, ts, send_address, send_amount, receive_addr, receive_amount, fee)
+    new_contract = ((contract, ts, send_address, send_amount, receive_addr, receive_amount, fee))
     print(new_contract)
     acesdb.storeContracts(new_contract)
     print("Contract Stored!")
