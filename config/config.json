@@ -1,0 +1,14 @@
+{
+  "network_a": "ark",
+  "network_a_epoch": 149010120000,
+  "network_b": "kapu",
+  "network_b_relay_ip": "x.x.x.x",
+  "service_acct_a": "",
+  "service_account_a_passphrase": "passphrase",
+  "service_account_a_secondphrase": "None",
+  "service_acct_b": "",
+  "service_account_b_passphrase": "passphrase",
+  "service_account_b_secondphrase": "None",
+  "flat_fee": 1,
+  "pct_fee": 0.0125
+  }
