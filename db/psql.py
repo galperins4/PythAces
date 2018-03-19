@@ -21,7 +21,7 @@ class DB:
 	    
     def last_transaction(self):
         try:
-            self.cursor.execute(f"""SELECT "timestamp" FROM transactions ORDER BY "rowId" DESC LIMIT 1""")
+            self.cursor.execute(f"""SELECT "rowId" FROM transactions ORDER BY "rowId" DESC LIMIT 1""")
             return self.cursor.fetchall()
         except Exception as e:
             print(e)	 
