@@ -49,10 +49,12 @@ if __name__ == '__main__':
           
         # query not empty means unprocessed contracts
         if unprocessed:
+            listen_start = int(time.time()) - data['network_a_epoch']
+            print("initial ts:", listen_start)
             for c in unprocessed:
-                listen_start = c[1]-data['network_a_epoch']
+                #listen_start = c[1]-data['network_a_epoch']
                 transactions = db.listen_transactions(listen_start)
-                
+                print("# of tx to process:", len(transactions))
                 for tx in transactions:
                     #check if contract matches vendor field
                     if c[0] == tx[4]:
@@ -65,7 +67,11 @@ if __name__ == '__main__':
                         acesdb.markAsProcessed(c[0])
                     else:
                         print("no match")
-                        
+                 
+                #update list_start based on last timestamp
+                listen_start = transactions[-1][1]
+                print("updated ts:", listen_start)
+                
                 #wait 60 seconds and then grab another set of transactions
                 time.sleep(60)
                 
