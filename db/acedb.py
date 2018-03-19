@@ -32,8 +32,7 @@ class AceDB:
 
     def storeContracts(self, contracts):
         newContracts=[]
-	print(contracts)
-	print(contracts[2])
+	
 	for c in contracts:
             print(c)
             self.cursor.execute("SELECT contract FROM contracts WHERE contract = ?", (c[0],))
