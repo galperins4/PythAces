@@ -30,10 +30,10 @@ class AceDB:
 
         self.connection.commit()
 
-    def storeContracts(self, contract):
+    def storeContracts(self, contracts):
         newContracts=[]
 
-        for c in contract:
+        for c in contracts:
             self.cursor.execute("SELECT contract FROM contracts WHERE contract = ?", (c[0],))
 
             if self.cursor.fetchone() is None:
