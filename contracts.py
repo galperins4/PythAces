@@ -36,10 +36,10 @@ if __name__ == '__main__':
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     contract = str(uuid4())
     ts = int(time.time())
-    send_address = "addr1"
+    send_address = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
     fee = data['flat_fee']
     send_amount = (1+fee) * atomic
-    receive_addr = "addr"
+    receive_addr = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
     receive_amount = 1 * atomic
     
     
