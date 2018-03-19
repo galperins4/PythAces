@@ -39,8 +39,9 @@ if __name__ == '__main__':
     username = get_dbname()
     db = DB(network[data['network_a']]['db'], username, network[data['network_a']]['db_pw'])
     
-    # connect to contracts database
+    # connect to contracts database and get last row of tx
     acesdb = AceDB(data['dbusername'])
+    test = acesdb.last_transaction()
     
     # processing loop
     while True:
