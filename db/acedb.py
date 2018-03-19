@@ -3,7 +3,7 @@ import time
 
 class AceDB:
     def __init__(self, u):
-        self.connection=sqlite3.connect('/home/'+u+'/pythaces/aces.db')
+        self.connection=sqlite3.connect('/home/'+u+'/PythAces/aces.db')
         self.cursor=self.connection.cursor()
 
     def commit(self):
