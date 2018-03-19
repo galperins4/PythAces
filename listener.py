@@ -55,23 +55,28 @@ if __name__ == '__main__':
                 #listen_start = c[1]-data['network_a_epoch']
                 transactions = db.listen_transactions(listen_start)
                 print("# of tx to process:", len(transactions))
-                for tx in transactions:
-                    #check if contract matches vendor field
-                    if c[0] == tx[4]:
-                        #we have a match - mark as processed and move to staging
-                        #store payment
-                        msg = "Thanks for using PythAces"
-                        acesdb.storePayment(c[0], c[4], c[5], msg)
+                
+                if transactions:
+                    for tx in transactions:
+                        #check if contract matches vendor field
+                        if c[0] == tx[4]:
+                            #we have a match - mark as processed and move to staging
+                            #store payment
+                            msg = "Thanks for using PythAces"
+                            acesdb.storePayment(c[0], c[4], c[5], msg)
                         
-                        #mark as processed
-                        acesdb.markAsProcessed(c[0])
-                    else:
-                        pass
-                 
-                #update list_start based on last timestamp
-                print(transactions[-1])
-                listen_start = transactions[-1][1]
-                print("updated ts:", listen_start)
+                            #mark as processed
+                            acesdb.markAsProcessed(c[0])
+                        else:
+                            pass
+                    #update list_start based on last timestamp
+                    print(transactions[-1])
+                    listen_start = transactions[-1][1]
+                    print("updated ts:", listen_start)
+                    #update transactions to break loop
+                    transactions = []
+                else:
+                    print("No Transactions to Process")
                 
                 #wait 60 seconds and then grab another set of transactions
                 time.sleep(60)
