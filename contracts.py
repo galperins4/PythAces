@@ -34,7 +34,7 @@ if __name__ == '__main__':
     acesdb = AceDB(data['dbusername'])
     
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
-    contract = uuid4()
+    contract = str(uuid4())
     ts = int(time.time())
     send_address = "addr1"
     fee = data['flat_fee']
