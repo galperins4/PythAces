@@ -38,10 +38,11 @@ if __name__ == '__main__':
     #check for special usernames needed for lisk forks
     username = get_dbname()
     db = DB(network[data['network_a']]['db'], username, network[data['network_a']]['db_pw'])
+    test = db.last_transaction()
+    print(test)
     
     # connect to contracts database and get last row of tx
     acesdb = AceDB(data['dbusername'])
-    test = acesdb.last_transaction()
     
     # processing loop
     while True:
