@@ -80,9 +80,6 @@ if __name__ == '__main__':
                 else:
                     print("No Transactions to Process")
                 
-                #wait 60 seconds and then grab another set of transactions
-                time.sleep(60)
-                
-        #no unprocessed contract
-        print("No unprocessed contracts, sleeping for 60 seconds")
+        print("Count of unprocessed contracts:", len(unprocessed))
+        print("Waiting 60 seconds for new transactions")
         time.sleep(60)
