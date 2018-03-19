@@ -37,7 +37,7 @@ if __name__ == '__main__':
     # initialize db connection
     #check for special usernames needed for lisk forks
     username = get_dbname()
-    db = DB(network[data['network']]['db'], username, network[data['network']]['db_pw'])
+    db = DB(network[data['network_a']]['db'], username, network[data['network_a']]['db_pw'])
     
     # connect to contracts database
     acesdb = AceDB(data['dbusername'])
