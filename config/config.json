@@ -1,7 +1,7 @@
 {
   "dbusername": "galp",
   "network_a": "dark",
-  "network_a_epoch": 149010120000,
+  "network_a_epoch": 1490101200,
   "network_b": "kapu",
   "network_b_relay_ip": "x.x.x.x",
   "service_acct_a": "DSjnsp1wnCAthp6UcEV3UivzvGLr84sLdh",
