@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 
 from tbw import parse_config
-from db.aces import AcesDB
+from db.acedb import AceDB
 from park.park import Park
 # from liskbuilder.transaction import TransactionBuilder
 import random
@@ -112,7 +112,7 @@ if __name__ == '__main__':
                 'lisk' : 'lisk'}
     
     data, network = parse_config()
-    snekdb = SnekDB(data['dbusername'])
+    acedb = AceDB(data['dbusername'])
     
     # Get the passphrase from config.json
     passphrase = data['passphrase']
