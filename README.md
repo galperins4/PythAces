@@ -2,7 +2,7 @@
 
 To do:
 
-- frontend
+FRONT END
 
 Display 
 - Service capacity
@@ -22,4 +22,4 @@ Site to return (also display as qr code for easy xfer
 - Total fee
 - Total to send to service accoint
 
-- backend
+BACKEND
