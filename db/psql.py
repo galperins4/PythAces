@@ -12,7 +12,7 @@ class DB:
         
         self.cursor=self.connection.cursor()
 
-    def listen_transactions(self, ts):
+    def listen_transactions(self, row):
         try:
             self.cursor.execute(f"""SELECT "id","senderId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "rowId" > {row} ORDER BY "rowId" DESC""")
             return self.cursor.fetchall()
