@@ -14,6 +14,7 @@ Site to accept input
 - Crypto B address
 - Crypto B amount to send
    
+   
 Site to return (also display as qr code for easy xfer
 - Contract # (vendor field)
 - Address to send to (service account)
@@ -23,3 +24,10 @@ Site to return (also display as qr code for easy xfer
 - Total to send to service accoint
 
 BACKEND
+
+- Convert contracts.py to class
+- add conversion rate function
+- clean up listener
+- add payout code
+- add code to check transaction vs capacity
+- add exception handling
