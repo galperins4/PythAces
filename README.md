@@ -31,3 +31,6 @@ BACKEND
 - add payout code
 - add code to check transaction vs capacity
 - add exception handling
+
+API
+- api access to get and post to 
