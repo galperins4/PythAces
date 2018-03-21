@@ -22,7 +22,7 @@ def parse_config():
 ''' 
 def get_dbname():
     ark_fork = ['ark','dark','kapu']
-    if  data['network'] in ark_fork:
+    if  A['network'] in ark_fork:
         uname = A['dbusername']
     else:
         uname = network[A['network']]['db_user']
