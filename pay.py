@@ -149,9 +149,6 @@ if __name__ == '__main__':
                     tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
           
                 signed_tx.append(tx)
-            
-            print(signed_tx)
-            quit()
           
             broadcast(signed_tx, p, park, reach)
             snekdb.processStagedPayment(unique_rowid)
