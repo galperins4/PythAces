@@ -117,9 +117,9 @@ if __name__ == '__main__':
     acedb = AceDB(A['dbusername'])
     
     # Get the passphrase from config.json
-    passphrase = B['passphrase']
+    passphrase = B['service_account_passphrase']
     # Get the second passphrase from config.json
-    secondphrase = B['secondphrase']
+    secondphrase = B['service_account_secondphrase']
     if secondphrase == 'None':
         secondphrase = None
     
