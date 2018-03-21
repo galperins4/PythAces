@@ -138,7 +138,7 @@ if __name__ == '__main__':
             unprocessed_pay = acedb.stagedLiskPayment().fetchall()
         else:
             unprocessed_pay = acedb.stagedArkPayment().fetchall()
-    
+        print(unprocessed_pay)
         # query not empty means unprocessed blocks
         if unprocessed_pay:
             p = get_peers(park)
