@@ -77,7 +77,7 @@ def broadcast(tx, p, park, r):
         time.sleep(1)
     except BaseException:
         # fall back to delegate node to grab data needed
-        bark = get_network(data, network, data['delegate_ip'])
+        bark = get_network(data, network, data['pay_relay_ip'])
         transaction = bark.transport().createBatchTransaction(tx)
         records = [[j['recipientId'],j['amount'],j['id']] for j in tx]
         time.sleep(1)
@@ -87,7 +87,7 @@ def broadcast(tx, p, park, r):
      # rotate through peers and begin broadcasting:
     for i in peer_cast:
         ip = i['ip']
-        peer_park = get_network(data, network, ip)
+        peer_park = get_network(B, network, ip)
         # cycle through and broadcast each tx on each peer and save responses
         
         try:
@@ -122,7 +122,7 @@ if __name__ == '__main__':
         secondphrase = None
     
     reach = data['reach']
-    park = get_network(data, network)
+    park = get_network(B, network)
 
     if B['network'] in lisk_fork.keys():
         netname = lisk_fork[B['network']]
@@ -150,7 +150,6 @@ if __name__ == '__main__':
                 
                 signed_tx.append(tx)
           
-  
             broadcast(signed_tx, p, park, reach)
             snekdb.processStagedPayment(unique_rowid)
 
