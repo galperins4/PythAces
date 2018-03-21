@@ -59,7 +59,6 @@ if __name__ == '__main__':
             for c in unprocessed:
                 if transactions:
                     for tx in transactions:
-                        print(tx)
                         #check if contract matches vendor field
                         if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
