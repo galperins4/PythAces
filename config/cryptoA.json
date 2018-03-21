@@ -1,0 +1,8 @@
+{
+  "dbusername": "galp",
+  "network": "dark",
+  "network_relay_ip": "x.x.x.x",
+  "service_acct": "DB8LnnQqYvHpG4WkGJ9AJWBYEct7G3yRZg",
+  "service_account_passphrase": "passphrase",
+  "service_account_secondphrase": "None"
+}
