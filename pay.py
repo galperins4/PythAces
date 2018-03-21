@@ -150,7 +150,6 @@ if __name__ == '__main__':
           
                 signed_tx.append(tx)
             print(unique_contracts)
-            quit()
             broadcast(signed_tx, p, park, reach)
             acedb.processStagedPayment(unique_contracts)
 
