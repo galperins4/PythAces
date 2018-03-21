@@ -1,8 +1,18 @@
 # PythAces
 
+
+
+Install
+
+- git clone https://github.com/galperins4/PythAces
+- npm install arkjs
+- install faustbrian ark client
+- update config files
+
+
 To do:
 
-FRONT END
+FRONT END 
 
 Display 
 - Service capacity
@@ -25,10 +35,8 @@ Site to return (also display as qr code for easy xfer
 
 BACKEND
 
-- Convert contracts.py to class
 - add conversion rate function
 - clean up listener
-- add payout code
 - add code to check transaction vs capacity
 - add exception handling
 
