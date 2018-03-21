@@ -131,7 +131,7 @@ if __name__ == '__main__':
     while True:
         # get peers
         signed_tx = []
-        unique_rowid = []
+        unique_contracts = []
         
         # check for unprocessed payments
         if B['network'] in lisk_fork.keys():
@@ -141,7 +141,7 @@ if __name__ == '__main__':
         # query not empty means unprocessed blocks
         if unprocessed_pay:
             p = get_peers(park)
-            unique_rowid = [y[0] for y in unprocessed_pay]
+            unique_contracts = [y[1] for y in unprocessed_pay]
             for i in unprocessed_pay:
                 if B['network'] in lisk_fork.keys():
                     tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
@@ -151,7 +151,7 @@ if __name__ == '__main__':
                 signed_tx.append(tx)
           
             broadcast(signed_tx, p, park, reach)
-            acedb.processStagedPayment(unique_rowid)
+            acedb.processStagedPayment(unique_contracts)
 
             # payment run complete
             print('Payment Run Completed!')
