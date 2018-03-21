@@ -19,16 +19,17 @@ def get_network(d, n, ip="localhost"):
 
 def get_peers(park):
     peers = []
-    
+    '''
     try:
         peers = park.peers().peers()['peers']
         print('peers:', len(peers))
     except BaseException:
-        # fall back to delegate node to grab data needed
-        bark = get_network(data, network, data['pay_relay_ip'])
-        peers = bark.peers().peers()['peers']
-        print('peers:', len(peers))
-        print('Switched to back-up API node')
+    '''
+    # fall back to delegate node to grab data needed
+    bark = get_network(B, network, data['pay_relay_ip'])
+    peers = bark.peers().peers()['peers']
+    print('peers:', len(peers))
+    print('Switched to back-up API node')
         
     return net_filter(peers)
 
@@ -43,14 +44,14 @@ def net_filter(p):
     compare = max([i['height'] for i in peerfil]) 
     
     #filter on good peers for LISKcoins
-    if data['network'] in lisk_fork.keys():
-        f1 = list(filter(lambda x: x['version'] == network[data['network']]['version'], peerfil))
+    if B['network'] in lisk_fork.keys():
+        f1 = list(filter(lambda x: x['version'] == network[B['network']]['version'], peerfil))
         f2 = list(filter(lambda x: x['state'] == 2, f1))
         final = list(filter(lambda x: compare - x['height'] < 153, f2))
         print('filtered peers', len(final))
     #filter on good peers for ARKcoins
     else:
-        f1 = list(filter(lambda x: x['version'] == network[data['network']]['version'], peerfil))
+        f1 = list(filter(lambda x: x['version'] == network[B['network']]['version'], peerfil))
         f2 = list(filter(lambda x: x['delay'] < 350, f1))
         f3 = list(filter(lambda x: x['status'] == 'OK', f2))
         final = list(filter(lambda x: compare - x['height'] < 153, f3))
@@ -71,18 +72,19 @@ def broadcast(tx, p, park, r):
         peer_cast = p[0:r]
 
     #broadcast to localhost/relay first
-    try:
+    '''try:
         transaction = park.transport().createBatchTransaction(tx)
         records = [[j['recipientId'],j['amount'],j['id']] for j in tx]
         time.sleep(1)
     except BaseException:
-        # fall back to delegate node to grab data needed
-        bark = get_network(data, network, data['pay_relay_ip'])
-        transaction = bark.transport().createBatchTransaction(tx)
-        records = [[j['recipientId'],j['amount'],j['id']] for j in tx]
-        time.sleep(1)
+    '''
+    # fall back to delegate node to grab data needed
+    bark = get_network(B, network, data['pay_relay_ip'])
+    transaction = bark.transport().createBatchTransaction(tx)
+    records = [[j['recipientId'],j['amount'],j['id']] for j in tx]
+    time.sleep(1)
     
-    snekdb.storeTransactions(records)
+    acedb.storeTransactions(records)
     
      # rotate through peers and begin broadcasting:
     for i in peer_cast:
