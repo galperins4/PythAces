@@ -138,12 +138,12 @@ if __name__ == '__main__':
             unprocessed_pay = acedb.stagedLiskPayment().fetchall()
         else:
             unprocessed_pay = acedb.stagedArkPayment().fetchall()
-        print(unprocessed_pay)
         # query not empty means unprocessed blocks
         if unprocessed_pay:
             p = get_peers(park)
             unique_rowid = [y[0] for y in unprocessed_pay]
-            for i in unprocessed_pay:              
+            for i in unprocessed_pay:
+                print(i)
                 if B['network'] in lisk_fork.keys():
                     tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
