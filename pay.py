@@ -151,7 +151,7 @@ if __name__ == '__main__':
                 signed_tx.append(tx)
           
             broadcast(signed_tx, p, park, reach)
-            snekdb.processStagedPayment(unique_rowid)
+            acedb.processStagedPayment(unique_rowid)
 
             # payment run complete
             print('Payment Run Completed!')
