@@ -96,7 +96,7 @@ class AceDB:
     def processStagedPayment(self, contract):
         contract = tuple(contract)
         ts = int(time.time())
-        self.cursor.execute("DELETE FROM staging WHERE contract IN '{contract}'")
+        self.cursor.execute("DELETE FROM staging WHERE contract IN {contract}")
         self.commit()
 
 
