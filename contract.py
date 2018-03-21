@@ -52,6 +52,6 @@ if __name__ == '__main__':
     #insantiate new contract object
     c = Contract()
     c.create(ts, send_address, send_amount, receive_addr, receive_amount, fee)
-    print(c.contract)
-    acesdb.storeContracts(c.contract)
+    test = (c.contract,)
+    acesdb.storeContracts(test)
     print("Contract Stored!")
