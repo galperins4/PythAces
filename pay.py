@@ -146,9 +146,9 @@ if __name__ == '__main__':
             unique_rowid = [y[0] for y in unprocessed_pay]
             for i in unprocessed_pay:              
                 if B['network'] in lisk_fork.keys():
-                    tx = TransactionBuilder().create(netname, i[1], i[2], passphrase, secondphrase)
+                    tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
-                    tx = park.transactionBuilder().create(i[1], str(i[2]), i[3], passphrase, secondphrase)
+                    tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
                 
                 signed_tx.append(tx)
           
