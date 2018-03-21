@@ -29,7 +29,6 @@ def get_peers(park):
     bark = get_network(B, network, data['pay_relay_ip'])
     peers = bark.peers().peers()['peers']
     print('peers:', len(peers))
-    print('Switched to back-up API node')
         
     return net_filter(peers)
 
