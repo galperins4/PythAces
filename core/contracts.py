@@ -8,4 +8,4 @@ class Contract:
         
     def create(self, ts, saddr, samt, raddr, ramt, fee):
         self.contract = self.contract + (ts, saddr, samt, raddr, ramt, fee)
-        return self.contract
+        return (self.contract,)
