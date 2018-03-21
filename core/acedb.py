@@ -86,18 +86,22 @@ class AceDB:
 
     def unprocessedContracts(self):
         return self.cursor.execute("SELECT * FROM contracts WHERE processed_at IS NULL")
-    '''
+  
     def processStagedPayment(self, contract):
         ts = int(time.time())
-        contract = tuple(contract)
-        self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract IN '{contract}'")
-        self.commit()
+        for i in contract:
+            self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract = '{i}'")
+            self.commit()
     '''
     def processStagedPayment(self, contract):
+      
+            
+        
         contract = tuple(contract)
         ts = int(time.time())
-        self.cursor.execute("DELETE FROM staging WHERE contract IN {contract}")
+        self.cursor.execute("DELETE FROM staging WHERE contract IN '{contract}'")
         self.commit()
+    '''
 
 
 
