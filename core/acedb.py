@@ -89,6 +89,7 @@ class AceDB:
     
     def processStagedPayment(self, contract):
         ts = int(time.time())
+        contract = tuple(contract)
         self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract IN '{contract}'")
         self.commit()
 
