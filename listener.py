@@ -3,7 +3,7 @@
 from core.psql import DB
 from core.acedb import AceDB
 import time
-from contracts import parse_config
+from contract import parse_config
 
 atomic = 100000000
 
