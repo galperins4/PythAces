@@ -1,8 +1,8 @@
 
 #!/usr/bin/env python
 
-from tbw import parse_config
-from db.acedb import AceDB
+from contract import parse_config
+from core.acedb import AceDB
 from park.park import Park
 # from liskbuilder.transaction import TransactionBuilder
 import random
@@ -25,7 +25,7 @@ def get_peers(park):
         print('peers:', len(peers))
     except BaseException:
         # fall back to delegate node to grab data needed
-        bark = get_network(data, network, data['delegate_ip'])
+        bark = get_network(data, network, data['pay_relay_ip'])
         peers = bark.peers().peers()['peers']
         print('peers:', len(peers))
         print('Switched to back-up API node')
@@ -111,21 +111,21 @@ if __name__ == '__main__':
                 'lisk-t': 'lisk',
                 'lisk' : 'lisk'}
     
-    data, network = parse_config()
-    acedb = AceDB(data['dbusername'])
+    data, network, A, B = parse_config()
+    acedb = AceDB(A['dbusername'])
     
     # Get the passphrase from config.json
-    passphrase = data['passphrase']
+    passphrase = B['passphrase']
     # Get the second passphrase from config.json
-    secondphrase = data['secondphrase']
+    secondphrase = B['secondphrase']
     if secondphrase == 'None':
         secondphrase = None
     
     reach = data['reach']
     park = get_network(data, network)
 
-    if data['network'] in lisk_fork.keys():
-        netname = lisk_fork[data['network']]
+    if B['network'] in lisk_fork.keys():
+        netname = lisk_fork[B['network']]
 
     while True:
         # get peers
@@ -133,36 +133,23 @@ if __name__ == '__main__':
         unique_rowid = []
         
         # check for unprocessed payments
-        if data['network'] in lisk_fork.keys():
-            unprocessed_pay = snekdb.stagedLiskPayment().fetchall()
+        if B['network'] in lisk_fork.keys():
+            unprocessed_pay = acedb.stagedLiskPayment().fetchall()
         else:
-            unprocessed_pay = snekdb.stagedArkPayment().fetchall()
+            unprocessed_pay = acedb.stagedArkPayment().fetchall()
     
         # query not empty means unprocessed blocks
         if unprocessed_pay:
             p = get_peers(park)
             unique_rowid = [y[0] for y in unprocessed_pay]
             for i in unprocessed_pay:              
-                try:
-                    if data['network'] in lisk_fork.keys():
-                        tx = TransactionBuilder().create(netname, i[1], i[2], passphrase, secondphrase)
-                    else:
-                        tx = park.transactionBuilder().create(i[1], str(i[2]), i[3], passphrase, secondphrase)
+                if B['network'] in lisk_fork.keys():
+                    tx = TransactionBuilder().create(netname, i[1], i[2], passphrase, secondphrase)
+                else:
+                    tx = park.transactionBuilder().create(i[1], str(i[2]), i[3], passphrase, secondphrase)
                 
-                    signed_tx.append(tx)
-                
-                except BaseException:
-                    # fall back to delegate node to grab data needed
-                    bark = get_network(
-                            data, data['delegate_ip'])
-                    
-                    if data['network'] in lisk_fork.keys():
-                        tx = TransactionBuilder().create(netname, i[1], i[2], passphrase, secondphrase)
-                    else:
-                        tx = bark.transactionBuilder().create(i[1], str(i[2]), i[3], passphrase, secondphrase)
-                    
-                    print('Switched to back-up API node')
-                    signed_tx.append(tx)
+                signed_tx.append(tx)
+          
   
             broadcast(signed_tx, p, park, reach)
             snekdb.processStagedPayment(unique_rowid)
