@@ -14,23 +14,23 @@ def parse_config():
     """
     with open('config/config.json') as data_file:
         data = json.load(data_file)
-        
+
     with open('config/networks.json') as network_file:
         network = json.load(network_file)
 
     return data, network
-    
+
 def get_dbname():
     ark_fork = ['ark','dark','kapu']
     if  data['network_a'] in ark_fork:
         uname = data['dbusername']
     else:
         uname = network[data['network_a']]['db_user']
-        
+
     return uname
 
 if __name__ == '__main__':
-    
+
     # get config data
     data, network = parse_config()
 
@@ -38,48 +38,44 @@ if __name__ == '__main__':
     #check for special usernames needed for lisk forks
     username = get_dbname()
     db = DB(network[data['network_a']]['db'], username, network[data['network_a']]['db_pw'])
-    test = db.last_transaction()
-    print(test)
-    
+    sr = db.last_transaction()
+    start_row = sr[0][0]
+
     # connect to contracts database and get last row of tx
     acesdb = AceDB(data['dbusername'])
-    
+
     # processing loop
     while True:
         #look for unprocessed contracts
         unprocessed = acesdb.unprocessedContracts().fetchall()
-          
+        print("Count of unprocessed contracts:", len(unprocessed))
+
         # query not empty means unprocessed contracts
         if unprocessed:
-            listen_start = int(time.time()) - data['network_a_epoch']
-            print("initial ts:", listen_start)
+            print("Processed through row:", start_row)
+            transactions = db.listen_transactions(start_row)
+            tx_cnt =  len(transactions)
+
             for c in unprocessed:
-                #listen_start = c[1]-data['network_a_epoch']
-                transactions = db.listen_transactions(listen_start)
-                print("# of tx to process:", len(transactions))
-                
                 if transactions:
                     for tx in transactions:
+                        print(tx)
                         #check if contract matches vendor field
-                        if c[0] == tx[4]:
+                        if c[0] == tx[5] and c[2] == tx[1] and data["service_acct_a"] == tx[2] and c[3] == tx[3$
                             #we have a match - mark as processed and move to staging
                             #store payment
                             msg = "Thanks for using PythAces"
                             acesdb.storePayment(c[0], c[4], c[5], msg)
-                        
+                            print("matched contract found")
+                            print("mark as processed")
+
                             #mark as processed
                             acesdb.markAsProcessed(c[0])
-                        else:
-                            pass
-                    #update list_start based on last timestamp
-                    print(transactions[-1])
-                    listen_start = transactions[-1][1]
-                    print("updated ts:", listen_start)
-                    #update transactions to break loop
-                    transactions = []
+                    #increment rows processed
+                    start_row += tx_cnt
+                    print("Processed through row:", start_row)
                 else:
                     print("No Transactions to Process")
-                
-        print("Count of unprocessed contracts:", len(unprocessed))
+
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
