@@ -123,7 +123,7 @@ if __name__ == '__main__':
         secondphrase = None
     
     reach = data['reach']
-    park = get_network(B, network)
+    park = get_network(B, network, data['pay_relay_ip'])
 
     if B['network'] in lisk_fork.keys():
         netname = lisk_fork[B['network']]
