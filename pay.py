@@ -73,14 +73,14 @@ def broadcast(tx, p, park, r):
     #broadcast to localhost/relay first
     '''try:
         transaction = park.transport().createBatchTransaction(tx)
-        records = [j['vendorField'],[j['recipientId'],j['amount'],j['id']] for j in tx]
+        records = [j['vendorField'],j['recipientId'],j['amount'],j['id']] for j in tx]
         time.sleep(1)
     except BaseException:
     '''
     # fall back to delegate node to grab data needed
     bark = get_network(B, network, data['pay_relay_ip'])
     transaction = bark.transport().createBatchTransaction(tx)
-    records = [j['vendorField'],[j['recipientId'],j['amount'],j['id']] for j in tx]
+    records = [j['vendorField'],j['recipientId'],j['amount'],j['id']] for j in tx]
     time.sleep(1)
     
     acedb.storeTransactions(records)
