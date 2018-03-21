@@ -143,11 +143,12 @@ if __name__ == '__main__':
             p = get_peers(park)
             unique_rowid = [y[0] for y in unprocessed_pay]
             for i in unprocessed_pay:
-                print(i)
                 if B['network'] in lisk_fork.keys():
                     tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
                     tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
+                    
+                print(tx)
                 
                 signed_tx.append(tx)
             
