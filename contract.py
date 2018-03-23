@@ -1,30 +1,15 @@
 
 #!/usr/bin/env python
 from core.acedb import AceDB
-import time
-import json
-import os.path
+from core.pythaces import Pythaces
 from core.contracts import Contract
+from pay import parse_config, get_network
+import time
+import os.path
 
 atomic = 100000000
 
-def parse_config():
-    """
-    Parse the config.json file and return the result.
-    """
-    with open('config/config.json') as data_file:
-        data = json.load(data_file)
-        
-    with open('config/networks.json') as network_file:
-        network = json.load(network_file)
-        
-    with open('config/cryptoA.json') as A:
-        cryptoA = json.load(A)
-        
-    with open('config/cryptoB.json') as B:
-        cryptoB = json.load(B)
-        
-    return data, network, cryptoA, cryptoB
+
 
 if __name__ == '__main__':
     
@@ -55,3 +40,24 @@ if __name__ == '__main__':
     test = (c.contract,)
     acesdb.storeContracts(test)
     print("Contract Stored!")
+    
+    #pythaces class
+    bark = get_network(B, network, B['relay_ip'])
+    pythaces = Pythaces(bark)
+    capacity = pythaces.service_capacity(B['service_account'])
+    print(capacity)
+    
+    #reserved_capacity = 
+    contracts = acesdb.unprocessedContracts()
+    reserved = pythaces.reserve_capacity(contracts)
+    print(reserved)
+    
+    #available_capacity = 
+    
+    
+    
+    
+    
+    
+    
+    

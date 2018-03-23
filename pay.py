@@ -1,12 +1,11 @@
 
 #!/usr/bin/env python
-
-from contract import parse_config
 from core.acedb import AceDB
 from park.park import Park
 # from liskbuilder.transaction import TransactionBuilder
 import random
 import time
+import json
 
 def get_network(d, n, ip="localhost"):
 
@@ -16,6 +15,24 @@ def get_network(d, n, ip="localhost"):
         n[d['network']]['nethash'],
         n[d['network']]['version']
     )
+
+def parse_config():
+    """
+    Parse the config.json file and return the result.
+    """
+    with open('config/config.json') as data_file:
+        data = json.load(data_file)
+        
+    with open('config/networks.json') as network_file:
+        network = json.load(network_file)
+        
+    with open('config/cryptoA.json') as A:
+        cryptoA = json.load(A)
+        
+    with open('config/cryptoB.json') as B:
+        cryptoB = json.load(B)
+        
+    return data, network, cryptoA, cryptoB
 
 def get_peers(park):
     peers = []
@@ -92,7 +109,7 @@ def broadcast(tx, p, park, r):
         # cycle through and broadcast each tx on each peer and save responses
         
         try:
-            transaction = peer_park.transport().createBatchTransaction(tx)
+            peer_park.transport().createBatchTransaction(tx)
             time.sleep(1)
         except:
             print("error")

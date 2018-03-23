@@ -6,20 +6,7 @@ import time
 from contract import parse_config
 
 atomic = 100000000
-
-'''
-def parse_config():
-    """
-    Parse the config.json file and return the result.
-    """
-    with open('config/config.json') as data_file:
-        data = json.load(data_file)
-        
-    with open('config/networks.json') as network_file:
-        network = json.load(network_file)
-
-    return data, network
-''' 
+ 
 def get_dbname():
     ark_fork = ['ark','dark','kapu']
     if  A['network'] in ark_fork:
@@ -58,13 +45,13 @@ if __name__ == '__main__':
             tx_cnt =  len(transactions)            
             
             for c in unprocessed:
-                print(expire-c[1])
                 #expire contracts after 15 minutes
                 if (expire - c[1]) > 900 :
                     acesdb.expireContract(c[0])
                 
                 elif transactions:
                     for tx in transactions:
+                        print(tx)
                         #check if contract matches vendor field
                         if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
