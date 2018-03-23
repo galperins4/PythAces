@@ -72,7 +72,7 @@ class AceDB:
         self.cursor.execute(f"UPDATE contracts SET processed_at = '{ts}' WHERE contract = '{contract}'")
         self.commit()
         
-    def expireContract(self, contracts):
+    def expireContract(self, contract):
         expired = "Expired"
         self.cursor.execute(f"UPDATE contracts SET processed_at = '{expired}' WHERE contract = '{contract}'")
         self.commit()
