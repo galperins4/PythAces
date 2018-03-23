@@ -26,6 +26,22 @@ if __name__ == '__main__':
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(A['dbusername'])
     
+    #Get capacity stats
+    #pythaces class
+    bark = get_network(B, network, B['relay_ip'])
+    pythaces = Pythaces(bark)
+    capacity = pythaces.service_capacity(B['service_acct'])
+    print("Total Capacity: ", capacity)
+    
+    #reserved_capacity = 
+    contracts = acesdb.unprocessedContracts()
+    reserved = pythaces.reserve_capacity(contracts)
+    print("Reserved Capacity: ", reserved)
+    
+    #available_capacity = 
+    available = pythaces.available_capacity()
+    print("Available Capcity: ", available)
+    
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
@@ -41,20 +57,6 @@ if __name__ == '__main__':
     acesdb.storeContracts(test)
     print("Contract Stored!")
     
-    #pythaces class
-    bark = get_network(B, network, B['relay_ip'])
-    pythaces = Pythaces(bark)
-    capacity = pythaces.service_capacity(B['service_acct'])
-    print(capacity)
-    
-    #reserved_capacity = 
-    contracts = acesdb.unprocessedContracts()
-    reserved = pythaces.reserve_capacity(contracts)
-    print(reserved)
-    
-    #available_capacity = 
-    available = pythaces.available_capacity()
-    print(available)
     
     
     
