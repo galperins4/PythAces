@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+import requests
 
 class Pythaces:
     def __init__(self, park, atomic):
@@ -21,7 +22,20 @@ class Pythaces:
         return self.reserve_capacity
     
     def available_capacity(self):
-        return self.capacity - self.reserve_capacity
+        self.available_capacity = self.capacity - self.reserve_capacity
+        return self.available_capacity 
     
-    def conversion_rate(self):
-        pass
+    def conversion_rate(self, a="ARK", b="KAPU"):
+        url = "https://min-api.cryptocompare.com/data/pricemulti"
+        fsyms = a+','+b
+        tsyms = "USD"
+        
+        #set request params
+        params = {"fsyms": fsyms,
+                  "tsyms": tsyms}
+        
+        r = requests.get(url, params=params)
+        
+        self.conversion_rate = r.json[b][tsyms] / r.json[a][tsyms]
+        
+        return self.conversion_rate 
