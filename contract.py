@@ -48,7 +48,7 @@ if __name__ == '__main__':
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())
     receive_addr = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
-    receive_amount = 1 * atomic
+    receive_amount = 250 * atomic
     print(receive_amount)
     
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
