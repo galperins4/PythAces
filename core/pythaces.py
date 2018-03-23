@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-
 class Pythaces:
-    def __init__(self, park):
+    def __init__(self, park, atomic):
         self.park = park
+        self.atomic = atomic
         
     def service_capacity(self, address):
         cap = self.park.accounts().balance(address)
