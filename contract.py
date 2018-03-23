@@ -44,7 +44,7 @@ if __name__ == '__main__':
     #pythaces class
     bark = get_network(B, network, B['relay_ip'])
     pythaces = Pythaces(bark)
-    capacity = pythaces.service_capacity(B['service_account'])
+    capacity = pythaces.service_capacity(B['service_acct'])
     print(capacity)
     
     #reserved_capacity = 
