@@ -9,8 +9,6 @@ import os.path
 
 atomic = 100000000
 
-
-
 if __name__ == '__main__':
     
     # get config data
@@ -29,7 +27,7 @@ if __name__ == '__main__':
     #Get capacity stats
     #pythaces class
     bark = get_network(B, network, B['relay_ip'])
-    pythaces = Pythaces(bark)
+    pythaces = Pythaces(bark, atomic)
     capacity = pythaces.service_capacity(B['service_acct'])
     print("Total Capacity: ", capacity)
     

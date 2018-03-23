@@ -42,7 +42,7 @@ if __name__ == '__main__':
             expire = int(time.time())
             print("Processed through row:", start_row) 
             transactions = db.listen_transactions(start_row)
-            tx_cnt =  len(transactions)            
+            tx_cnt =  len(transactions)
             
             for c in unprocessed:
                 #expire contracts after 15 minutes
@@ -51,7 +51,7 @@ if __name__ == '__main__':
                 
                 elif transactions:
                     for tx in transactions:
-                        print(tx)
+                        #note t[0] is tx
                         #check if contract matches vendor field
                         if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
@@ -59,11 +59,9 @@ if __name__ == '__main__':
                             msg = "Thanks for using PythAces - contract "+c[0]
                             acesdb.storePayment(c[0], c[4], c[5], msg)
                             acesdb.markAsProcessed(c[0])
-                    #increment rows processed
-                    start_row += tx_cnt
-                    print("Processed through row:", start_row)
-                else:
-                    print("No Transactions to Process")
+            #increment rows processed
+            start_row += tx_cnt
+            print("Processed through row:", start_row)
 
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
