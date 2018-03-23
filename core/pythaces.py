@@ -36,6 +36,6 @@ class Pythaces:
         
         r = requests.get(url, params=params)
         
-        self.conversion_rate = r.json[b][tsyms] / r.json[a][tsyms]
+        self.conversion_rate = r.json()[b][tsyms] / r.json()[a][tsyms]
         
         return self.conversion_rate 
