@@ -21,7 +21,7 @@ class Pythaces:
         return self.reserve_capacity
     
     def available_capacity(self):
-        return self.capacity - self.reserve.capacity
+        return self.capacity - self.reserve_capacity
     
     def conversion_rate(self):
         pass
