@@ -53,6 +53,8 @@ if __name__ == '__main__':
     print(reserved)
     
     #available_capacity = 
+    available = pythaces.available_capacity()
+    print(available)
     
     
     
