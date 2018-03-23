@@ -56,11 +56,11 @@ if __name__ == '__main__':
     converted_amount = receive_amount * conversion_rate
     f_fee = data['flat_fee'] * atomic
     p_fee = data['pct_fee'] * converted_amount
-    total_fee = (p_fee + f_fee)
+    total_fee = int((p_fee + f_fee))
     print(total_fee)
     
     
-    send_amount = (converted_amount) + total_fee
+    send_amount = int((converted_amount)) + total_fee
     print(send_amount)
     
     #insantiate new contract object
