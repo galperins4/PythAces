@@ -47,15 +47,23 @@ if __name__ == '__main__':
     
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())
-    send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
-    fee = data['flat_fee']
-    send_amount = (1+fee) * atomic
     receive_addr = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
     receive_amount = 1 * atomic
+    print(receive_amount)
+    
+    send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
+    send_amt = 250
+    converted_amount = send_amt * conversion_rate
+    f_fee = data['flat_fee']
+    p_fee = data['pct_fee'] * converted_amount
+    total_fee = (p_fee + f_fee) * atomic
+    
+    send_amount = (converted_amount * atomic) + total_fee
+    print(send_amount)
     
     #insantiate new contract object
     c = Contract()
-    c.create(ts, send_address, send_amount, receive_addr, receive_amount, fee)
+    c.create(ts, send_address, send_amount, receive_addr, receive_amount, total_fee)
     test = (c.contract,)
     acesdb.storeContracts(test)
     print("Contract Stored!")
