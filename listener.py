@@ -52,12 +52,18 @@ if __name__ == '__main__':
           
         # query not empty means unprocessed contracts
         if unprocessed:
+            expire = int(time.time())
             print("Processed through row:", start_row) 
             transactions = db.listen_transactions(start_row)
             tx_cnt =  len(transactions)            
             
             for c in unprocessed:
-                if transactions:
+                print(expire-c[1])
+                #expire contracts after 15 minutes
+                if (expire - c[1]) > 900 :
+                    acesdb.expireContract(c[0])
+                
+                elif transactions:
                     for tx in transactions:
                         #check if contract matches vendor field
                         if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
