@@ -57,6 +57,8 @@ if __name__ == '__main__':
     f_fee = data['flat_fee']
     p_fee = data['pct_fee'] * converted_amount
     total_fee = (p_fee + f_fee) * atomic
+    print(total_fee)
+    
     
     send_amount = (converted_amount * atomic) + total_fee
     print(send_amount)
