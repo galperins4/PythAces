@@ -96,7 +96,7 @@ def broadcast(tx, p, park, r):
     '''
     # fall back to delegate node to grab data needed
     bark = get_network(B, network, data['pay_relay_ip'])
-    transaction = bark.transport().createBatchTransaction(tx)
+    bark.transport().createBatchTransaction(tx)
     records = [[j['vendorField'],j['recipientId'],j['amount'],j['id']] for j in tx]
     time.sleep(1)
     

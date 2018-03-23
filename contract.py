@@ -26,8 +26,10 @@ if __name__ == '__main__':
     
     #Get capacity stats
     #pythaces class
-    bark = get_network(B, network, B['relay_ip'])
-    pythaces = Pythaces(bark, atomic)
+    coina = get_network(A, network, A['relay_ip'])
+    coinb = get_network(B, network, B['relay_ip'])
+    
+    pythaces = Pythaces(coinb, atomic)
     capacity = pythaces.service_capacity(B['service_acct'])
     print("Total Capacity: ", capacity)
     
@@ -39,6 +41,9 @@ if __name__ == '__main__':
     #available_capacity = 
     available = pythaces.available_capacity()
     print("Available Capcity: ", available)
+    
+    conversion_rate = pythaces.converion_rate()
+    print(conversion_rate)
     
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())

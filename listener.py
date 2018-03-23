@@ -40,7 +40,6 @@ if __name__ == '__main__':
         # query not empty means unprocessed contracts
         if unprocessed:
             expire = int(time.time())
-            print("Processed through row:", start_row) 
             transactions = db.listen_transactions(start_row)
             tx_cnt =  len(transactions)
             
