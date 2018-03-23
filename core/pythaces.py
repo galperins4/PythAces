@@ -7,7 +7,7 @@ class Pythaces:
         
     def service_capacity(self, address):
         cap = self.park.accounts().balance(address)
-        self.capacity = cap['balance']
+        self.capacity = int(cap['balance'])
         
         return self.capacity
     
