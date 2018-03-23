@@ -71,7 +71,12 @@ class AceDB:
         ts = int(time.time())
         self.cursor.execute(f"UPDATE contracts SET processed_at = '{ts}' WHERE contract = '{contract}'")
         self.commit()
-
+        
+    def expireContract(self, contracts):
+        expired = "Expired"
+        self.cursor.execute(f"UPDATE contracts SET processed_at = '{expired}' WHERE contract = '{contract}'")
+        self.commit()
+        
     def contracts(self):
         return self.cursor.execute("SELECT * FROM contracts")
     
@@ -87,9 +92,9 @@ class AceDB:
     def unprocessedContracts(self):
         return self.cursor.execute("SELECT * FROM contracts WHERE processed_at IS NULL")
   
-    def processStagedPayment(self, contract):
+    def processStagedPayment(self, contracts):
         ts = int(time.time())
-        for i in contract:
+        for i in contracts:
             self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract = '{i}'")
             self.commit()
 
