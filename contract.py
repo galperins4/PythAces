@@ -42,7 +42,7 @@ if __name__ == '__main__':
     available = pythaces.available_capacity()
     print("Available Capcity: ", available)
     
-    conversion_rate = pythaces.converion_rate()
+    conversion_rate = pythaces.conversion_rate()
     print(conversion_rate)
     
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
