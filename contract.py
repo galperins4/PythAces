@@ -52,8 +52,8 @@ if __name__ == '__main__':
     print(receive_amount)
     
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
-    send_amt = 250
-    converted_amount = send_amt * conversion_rate
+    # send_amt = 250
+    converted_amount = receive_amount * conversion_rate
     f_fee = data['flat_fee']
     p_fee = data['pct_fee'] * converted_amount
     total_fee = (p_fee + f_fee) * atomic
