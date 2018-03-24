@@ -35,8 +35,8 @@ if __name__ == '__main__':
         #this means we have a starting row
         for r in check_start:
             r_start = r[0]
-        print(r_start)
-        quit()
+        #set starting row for processing
+        start_row = r_start
     else:
         #no starting transaction processed      
         sr = db.last_transaction()
