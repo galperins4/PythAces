@@ -22,14 +22,24 @@ class AceDB:
         return self.cursor.fetchall()
 
     def setup(self):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS contracts (contract varchar(64), timestamp int, s_addr varchar(36), s_amt bigint, r_addr varchar(36), r_amt bigint, c_fee bigint, processed_at varchar(64) null)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS contracts (contract varchar(64), timestamp int, s_addr varchar(36), s_amt bigint, r_addr varchar(36), r_amt bigint, c_fee bigint, status varchar(36), processed_at varchar(64) null)")
 
         self.cursor.execute("CREATE TABLE IF NOT EXISTS transactions (contract varchar(64), address varchar(36), amount varchar(64), id varchar(64), processed_at varchar(64) )")
         
         self.cursor.execute("CREATE TABLE IF NOT EXISTS staging (contract varchar(64), address varchar(36), payamt bigint, msg varchar(64), processed_at varchar(64) null )")
 
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS rows (row bigint) ")
+        
         self.connection.commit()
 
+    def storeRow(self,row):
+        start = 1
+        self.cursor.execute(f"UPDATE rows SET row = {row} WHERE rowid = {start}")
+        self.commit()
+        
+    def getRows(self):
+        return self.cursor.execute("SELECT * FROM rows")
+     
     def storeContracts(self, contracts):
         newContracts=[]
         
@@ -37,7 +47,7 @@ class AceDB:
             self.cursor.execute("SELECT contract FROM contracts WHERE contract = ?", (c[0],))
 
             if self.cursor.fetchone() is None:
-                newContracts.append((c[0], c[1], c[2], c[3], c[4], c[5], c[6], None))
+                newContracts.append((c[0], c[1], c[2], c[3], c[4], c[5], c[6],"Pending Confirmation", None))
 
         self.executemany("INSERT INTO contracts VALUES (?,?,?,?,?,?,?,?)", newContracts)
 
