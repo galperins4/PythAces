@@ -74,7 +74,7 @@ if __name__ == '__main__':
             start_row += tx_cnt
             print("Processed through row:", start_row)
             #update start_row in database
-            acesdb.storeRow(start_row)
+            acesdb.updateRow(start_row)
 
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
