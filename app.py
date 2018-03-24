@@ -27,16 +27,13 @@ def capacity():
     
         pythaces = Pythaces(b, atomic)
         capacity = pythaces.service_capacity(B['service_acct'])
-        print("Total Capacity: ", capacity)
-    
+        
         #reserved_capacity = 
         contracts = acesdb.unprocessedContracts()
         reserved = pythaces.reserve_capacity(contracts)
-        print("Reserved Capacity: ", reserved)
     
         #available_capacity = 
         available = pythaces.available_capacity()
-        print("Available Capacity: ", available)
     
         capDict = {
                 "Total Capacity": capacity,
@@ -44,12 +41,12 @@ def capacity():
                 "Avaiable Capacity": available}
         
         #convert data
-        jsonStr = json.dumps(capDict)
+        #jsonStr = json.dumps(capDict)
         
     except:
         print("Error")
         
-    return jsonify(Capacity=jsonStr)
+    return jsonify(Capacity=capDict)
 
 if __name__ == "__main__":
     # get config data
