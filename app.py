@@ -20,24 +20,19 @@ def contracts():
 
 @app.route("/capacity")
 def capacity():
-    try:
- 
-        capacity = pythaces.service_capacity(B['service_acct'])
+    capacity = pythaces.service_capacity(B['service_acct'])
         
-        #reserved_capacity = 
-        contracts = acesdb.unprocessedContracts()
-        reserved = pythaces.reserve_capacity(contracts)
+    #reserved_capacity = 
+    contracts = acesdb.unprocessedContracts()
+    reserved = pythaces.reserve_capacity(contracts)
     
-        #available_capacity = 
-        available = pythaces.available_capacity()
+    #available_capacity = 
+    available = pythaces.available_capacity()
     
-        capDict = {
+    capDict = {
                 "Total Capacity": capacity,
                 "Reserved Capacity": reserved,
                 "Avaiable Capacity": available}
-        
-    except:
-        print("Error")
         
     return jsonify(Capacity=capDict)
 
