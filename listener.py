@@ -33,8 +33,9 @@ if __name__ == '__main__':
     
     if check_start:
         #this means we have a starting row
-        r_start = [i for i in check_start]
-        print(r_start[0])
+        for r in check_start:
+            r_start = r[0]
+        print(r_start)
         quit()
     else:
         #no starting transaction processed      
