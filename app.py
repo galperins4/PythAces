@@ -21,11 +21,7 @@ def contracts():
 @app.route("/capacity")
 def capacity():
     try:
-        
-        #a = get_network(A, network, A['relay_ip'])
-        b = get_network(B, network, B['relay_ip'])
-    
-        pythaces = Pythaces(b, atomic)
+ 
         capacity = pythaces.service_capacity(B['service_acct'])
         
         #reserved_capacity = 
@@ -39,9 +35,6 @@ def capacity():
                 "Total Capacity": capacity,
                 "Reserved Capacity": reserved,
                 "Avaiable Capacity": available}
-        
-        #convert data
-        #jsonStr = json.dumps(capDict)
         
     except:
         print("Error")
@@ -61,5 +54,9 @@ if __name__ == "__main__":
     
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(A['dbusername'])
+    
+    #pythaces class
+    b = get_network(B, network, B['relay_ip'])
+    pythaces = Pythaces(b, atomic)
 
     app.run(host = "192.168.1.116")
