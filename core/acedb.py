@@ -33,9 +33,9 @@ class AceDB:
         self.connection.commit()
 
     def storeRow(self,row):
-        staging=[]
-        staging.append((row))
-        self.execute("INSERT INTO rows VALUES (?)", row)
+        r=[]
+        r.append((row))
+        self.execute("INSERT INTO rows VALUES (?)", r)
         self.commit()
 
     def updateRow(self,row):
