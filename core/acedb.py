@@ -35,7 +35,7 @@ class AceDB:
     def storeRow(self,row):
         staging=[]
         staging.append((row))
-        self.executemany("INSERT INTO row VALUES (?)", row)
+        self.execute("INSERT INTO row VALUES (?)", row)
         self.commit()
 
     def updateRow(self,row):
