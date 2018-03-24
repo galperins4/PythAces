@@ -85,4 +85,4 @@ if __name__ == "__main__":
     
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(A['dbusername'])
-    app.run(host = "192.168.1.116")
+    app.run(host = "xx.xx.xx.xx")
