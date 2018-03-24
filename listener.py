@@ -25,11 +25,23 @@ if __name__ == '__main__':
     #check for special usernames needed for lisk forks
     username = get_dbname()
     db = DB(network[A['network']]['db'], username, network[A['network']]['db_pw'])
-    sr = db.last_transaction()
-    start_row = sr[0][0]
-    
+ 
     # connect to contracts database and get last row of tx
     acesdb = AceDB(A['dbusername'])
+    
+    check_start = acesdb.getRows()
+    
+    if check_start:
+        #this means we have a starting row
+        print(check_start)
+        quit()
+    else:
+        #no starting transaction processed      
+        sr = db.last_transaction()
+        start_row = sr[0][0]
+        #store starting row
+        acesdb.storeRow(start_row)
+
     
     # processing loop
     while True:
@@ -61,6 +73,8 @@ if __name__ == '__main__':
             #increment rows processed
             start_row += tx_cnt
             print("Processed through row:", start_row)
+            #update start_row in database
+            acesdb.storeRow(start_row)
 
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
