@@ -33,7 +33,13 @@ class AceDB:
         self.connection.commit()
 
     def storeRow(self,row):
-        start = 1
+        staging=[]
+        staging.append((row))
+        self.executemany("INSERT INTO row VALUES (?)", row)
+        self.commit()
+
+    def updateRow(self,row):
+        start = 1        
         self.cursor.execute(f"UPDATE rows SET row = {row} WHERE rowid = {start}")
         self.commit()
         
