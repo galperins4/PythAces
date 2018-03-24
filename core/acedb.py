@@ -85,12 +85,13 @@ class AceDB:
         
     def markAsProcessed(self, contract):
         ts = int(time.time())
-        self.cursor.execute(f"UPDATE contracts SET processed_at = '{ts}' WHERE contract = '{contract}'")
+        msg = "Processed"
+        self.cursor.execute(f"UPDATE contracts SET status = '{msg}', processed_at = '{ts}' WHERE contract = '{contract}'")
         self.commit()
         
     def expireContract(self, contract):
         expired = "Expired"
-        self.cursor.execute(f"UPDATE contracts SET processed_at = '{expired}' WHERE contract = '{contract}'")
+        self.cursor.execute(f"UPDATE contracts SET status = '{expired}', processed_at = '{expired}' WHERE contract = '{contract}'")
         self.commit()
         
     def contracts(self):
