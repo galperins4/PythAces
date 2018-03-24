@@ -30,7 +30,7 @@ def prices():
         print("Error")
     
 
-    return jsonify(Capacity=priceDict)
+    return jsonify(Prices=priceDict)
 
 @app.route('/contracts', methods=['POST']) 
 def contracts():
