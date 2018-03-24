@@ -29,7 +29,7 @@ if __name__ == '__main__':
     # connect to contracts database and get last row of tx
     acesdb = AceDB(A['dbusername'])
     
-    check_start = acesdb.getRows()
+    check_start = acesdb.getRows().fetchall()
     
     if check_start:
         #this means we have a starting row
