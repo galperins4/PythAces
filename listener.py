@@ -33,7 +33,7 @@ if __name__ == '__main__':
     
     if check_start:
         #this means we have a starting row
-        print(check_start)
+        print(check_start[0])
         quit()
     else:
         #no starting transaction processed      
