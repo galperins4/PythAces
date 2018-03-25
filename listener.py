@@ -8,7 +8,7 @@ from contract import parse_config
 atomic = 100000000
  
 def get_dbname():
-    ark_fork = ['ark','dark','kapu']
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     if  A['network'] in ark_fork:
         uname = A['dbusername']
     else:
