@@ -96,7 +96,7 @@ if __name__ == '__main__':
                 
                     #look for match - added error handling for index issues
                     try:
-                        if len(net_check[1] == 34:
+                        if len(net_check[1]) == 34:
                         #high likelihood of match
                         #DO SOME CALCULATIONS HERE TO FIGURE OUT FEES AND RECEIVE AMOUNTS
                     
