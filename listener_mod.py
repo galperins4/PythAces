@@ -23,8 +23,8 @@ def parse_config():
     with open('config/cryptoB.json') as B:
         cryptoB = json.load(B)
       
-    with open('config/coin.json') as coin:
-        cryptoB = json.load(coin)
+    with open('config/coin.json') as C:
+        coin = json.load(C)
         
     return data, network, cryptoA, cryptoB, coin
  
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     
     # get config data
     data, network, A, B, coin = parse_config()
-    print(coin)
+    print(coin.keys())
     quit()
 
     # initialize db connection
