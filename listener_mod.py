@@ -65,7 +65,7 @@ if __name__ == '__main__':
         sr = db.last_transaction()
         start_row = sr[0][0]
         #store starting row
-        acesdb.storeRow(start_row)
+        #acesdb.storeRow(start_row)
     
     # processing loop
     while True:
