@@ -29,7 +29,7 @@ def parse_config():
     return data, network, cryptoA, cryptoB, coin
  
 def get_dbname():
-    ark_fork = ['ark','dark','kapu', 'persona-t']
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     if  A['network'] in ark_fork:
         uname = A['dbusername']
     else:
@@ -40,18 +40,20 @@ def get_dbname():
 if __name__ == '__main__':
     
     # get config data
-    data, network, A, B = parse_config()
+    data, network, A, B, coin = parse_config()
 
     # initialize db connection
     #check for special usernames needed for lisk forks
     username = get_dbname()
     db = DB(network[A['network']]['db'], username, network[A['network']]['db_pw'])
- 
+    ''' 
     # connect to contracts database and get last row of tx
     acesdb = AceDB(A['dbusername'])
-    
+    '''
+    check_start = None
+    '''
     check_start = acesdb.getRows().fetchall()
-    
+    '''
     if check_start:
         #this means we have a starting row
         for r in check_start:
@@ -67,6 +69,7 @@ if __name__ == '__main__':
     
     # processing loop
     while True:
+        '''
         #look for unprocessed contracts
         unprocessed = acesdb.unprocessedContracts().fetchall()
         print("Count of unprocessed contracts:", len(unprocessed))
@@ -74,29 +77,37 @@ if __name__ == '__main__':
         # query not empty means unprocessed contracts
         if unprocessed:
             expire = int(time.time())
-            transactions = db.listen_transactions(start_row)
-            tx_cnt =  len(transactions)
+        '''
+        
+        transactions = db.listen_transactions(start_row)
+        tx_cnt =  len(transactions)
             
-            for c in unprocessed:
+        '''    for c in unprocessed:
                 #expire contracts after 15 minutes
                 if (expire - c[1]) > 900 :
                     acesdb.expireContract(c[0])
+           '''     
+        if transactions:
+            for tx in transactions:
+            net_check = tx[5].split(":")
+            if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2];
+                #possible match
+                receive_net = net_check[0]:
                 
-                elif transactions:
-                    for tx in transactions:
-                        #note t[0] is tx
-                        #check if contract matches vendor field
-                        if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
-                            #we have a match - mark as processed and move to staging
-                            #store payment and mark as processed
-                            msg = "Thanks for using PythAces - contract "+c[0]
-                            acesdb.storePayment(c[0], c[4], c[5], msg)
-                            acesdb.markAsProcessed(c[0])
-            #increment rows processed
+                #look for match - added error handling for index issues
+                try:
+                    if len(net_check[1] == 34:
+                    #high likelihood of match
+                    #DO SOME CALCULATIONS HERE TO FIGURE OUT FEES AND RECEIVE AMOUNTS
+                    
+                    msg = "Aces Test"       
+                    
+                    acesdb.storePayment(tx[5], net_check[1], atomic, msg)
+                    #acesdb.markAsProcessed(c[0])
             start_row += tx_cnt
             print("Processed through row:", start_row)
             #update start_row in database
             acesdb.updateRow(start_row)
-
+            
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
