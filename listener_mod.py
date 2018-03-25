@@ -89,22 +89,25 @@ if __name__ == '__main__':
            '''     
         if transactions:
             for tx in transactions:
-            net_check = tx[5].split(":")
-            if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2];
-                #possible match
-                receive_net = net_check[0]:
+                net_check = tx[5].split(":")
+                if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2];
+                    #possible match
+                    receive_net = net_check[0]:
                 
-                #look for match - added error handling for index issues
-                try:
-                    if len(net_check[1] == 34:
-                    #high likelihood of match
-                    #DO SOME CALCULATIONS HERE TO FIGURE OUT FEES AND RECEIVE AMOUNTS
+                    #look for match - added error handling for index issues
+                    try:
+                        if len(net_check[1] == 34:
+                        #high likelihood of match
+                        #DO SOME CALCULATIONS HERE TO FIGURE OUT FEES AND RECEIVE AMOUNTS
                     
-                    msg = "Aces Test"       
+                            msg = "Aces Test"       
                     
-                    acesdb.storePayment(tx[5], net_check[1], atomic, msg)
-                    #acesdb.markAsProcessed(c[0])
-            
+                        acesdb.storePayment(tx[5], net_check[1], atomic, msg)
+                        #acesdb.markAsProcessed(c[0])
+ 
+                    except:
+                        print("Non-Matching or Errored Vendor Field")
+                               
             start_row += tx_cnt
             print("Processed through row:", start_row)
             
