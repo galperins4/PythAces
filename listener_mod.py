@@ -41,8 +41,6 @@ if __name__ == '__main__':
     
     # get config data
     data, network, A, B, coin = parse_config()
-    print(coin.keys())
-    quit()
 
     # initialize db connection
     #check for special usernames needed for lisk forks
