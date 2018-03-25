@@ -92,7 +92,7 @@ if __name__ == '__main__':
                 net_check = tx[5].split(":")
                 if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2]:
                     #possible match
-                    receive_net = net_check[0]:
+                    receive_net = net_check[0]
                 
                     #look for match - added error handling for index issues
                     try:
