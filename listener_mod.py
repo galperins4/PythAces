@@ -101,8 +101,8 @@ if __name__ == '__main__':
                         #DO SOME CALCULATIONS HERE TO FIGURE OUT FEES AND RECEIVE AMOUNTS
                     
                             msg = "Aces Test"       
-                    
-                        acesdb.storePayment(tx[5], net_check[1], atomic, msg)
+                            print("matching tx")
+                        #acesdb.storePayment(tx[5], net_check[1], atomic, msg)
                         #acesdb.markAsProcessed(c[0])
  
                     except:
