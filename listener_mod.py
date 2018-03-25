@@ -104,10 +104,12 @@ if __name__ == '__main__':
                     
                     acesdb.storePayment(tx[5], net_check[1], atomic, msg)
                     #acesdb.markAsProcessed(c[0])
+            
             start_row += tx_cnt
             print("Processed through row:", start_row)
+            
             #update start_row in database
-            acesdb.updateRow(start_row)
+            #acesdb.updateRow(start_row)
             
         print("Waiting 60 seconds for new transactions")
         time.sleep(60)
