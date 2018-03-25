@@ -90,7 +90,7 @@ if __name__ == '__main__':
         if transactions:
             for tx in transactions:
                 net_check = tx[5].split(":")
-                if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2];
+                if net_check[0] in coin.keys() and coin['dark']['service_acct'] == tx[2]:
                     #possible match
                     receive_net = net_check[0]:
                 
