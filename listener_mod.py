@@ -3,12 +3,33 @@
 from core.psql import DB
 from core.acedb import AceDB
 import time
-from contract import parse_config
+import json
 
 atomic = 100000000
  
+def parse_config():
+    """
+    Parse the config.json file and return the result.
+    """
+    with open('config/config.json') as data_file:
+        data = json.load(data_file)
+        
+    with open('config/networks.json') as network_file:
+        network = json.load(network_file)
+        
+    with open('config/cryptoA.json') as A:
+        cryptoA = json.load(A)
+        
+    with open('config/cryptoB.json') as B:
+        cryptoB = json.load(B)
+      
+     with open('config/coin.json') as coin:
+        cryptoB = json.load(coin)
+        
+    return data, network, cryptoA, cryptoB, coin
+ 
 def get_dbname():
-    ark_fork = ['ark','dark','kapu']
+    ark_fork = ['ark','dark','kapu', 'persona-t']
     if  A['network'] in ark_fork:
         uname = A['dbusername']
     else:
