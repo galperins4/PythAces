@@ -4,17 +4,17 @@
       "relay_ip": "x.x.x.x",
       "service_acct": "DB8LnnQqYvHpG4WkGJ9AJWBYEct7G3yRZg",
       "service_account_passphrase": "passphrase",
-      "service_account_secondphrase": "None"},
+      "service_account_secondphrase": "None"}
   "dkapu":{
       "dbusername": "galp",
       "relay_ip": "x.x.x.x",
       "service_acct": "DB8LnnQqYvHpG4WkGJ9AJWBYEct7G3yRZg",
       "service_account_passphrase": "passphrase",
-      "service_account_secondphrase": "None"},
+      "service_account_secondphrase": "None"}
   "persona-t":{
       "dbusername": "galp",
       "relay_ip": "x.x.x.x",
       "service_acct": "DB8LnnQqYvHpG4WkGJ9AJWBYEct7G3yRZg",
       "service_account_passphrase": "passphrase",
-      "service_account_secondphrase": "None"},
+      "service_account_secondphrase": "None"}
 }
