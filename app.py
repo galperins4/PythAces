@@ -40,8 +40,8 @@ def coin():
     print("Contract Stored!")
     '''
     
-    #return json to client (address, amount, vendorfield)
-    return json.dumps(request.json)
+        #return json to client (address, amount, vendorfield)
+        return json.dumps(request.json)
 
 #display all prices
 @app.route("/prices")
