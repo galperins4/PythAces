@@ -90,14 +90,13 @@ def letter(l):
     for k,v in coin.items():
        print(v.get("addr_start"))
        quit()
-        '''
-        if v.get("addr_start") == l:
-            n = k
-        else:
-            print("Error - Not Found")
-            quit()
-    return n
-    '''
+       #if v.get("addr_start") == l:
+        #    n = k
+       #else:
+        #    print("Error - Not Found")
+        #    quit()
+   # return n
+    
     
 '''
 def broadcast(tx, p, park, r):
