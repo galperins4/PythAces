@@ -184,22 +184,14 @@ if __name__ == '__main__':
                     # get passphrases
                     pp, sp = get_passphrases(net)
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
-                    transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
-                    print(transaction)
-                    #transaction = park.transactions().create('address', 'amount', 'vendor', 'secret', 'second secret')
+                    try:
+                        transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
+                        print(transaction)
                     
-                    #assuming transaction is good, update staged record for this contract
-                    acedb.processStagedPayment(i[1])
-                    
-                    
-                    #tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
-          
-                #signed_tx.append(tx)
-            
-            # p = get_peers(park)
-            
-            #broadcast(signed_tx, p, park, reach)
-            #acedb.processStagedPayment(i[1])
+                        #assuming transaction is good, update staged record for this contract
+                        acedb.processStagedPayment(i[1])
+                    except:
+                        print("Error Sending Transaction, Try again!")
 
             # payment run complete
             print('Payment Run Completed!')
