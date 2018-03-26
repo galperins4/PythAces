@@ -66,8 +66,8 @@ def prices():
                 
         return jsonify(Prices=priceDict)
     
-    except:
-         error ={"Status":"Unsuccessful"}
+    except:	
+        error ={"Status":"Unsuccessful"}
         return jsonify(Error=error)
 
 #Change this to just send contracts
