@@ -183,7 +183,7 @@ if __name__ == '__main__':
                     #instantiate park object
                     park = fx_coins[net]                    
                     # get passphrases
-                    pp, sp = get_passphrases[net]
+                    pp, sp = get_passphrases(net)
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     transaction = park.transaction().create(i[2], str(i[3]), i[4], pp, sp)
                     print(transaction)
