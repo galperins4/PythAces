@@ -10,10 +10,13 @@ class Pythaces:
         
         return self.capacity
     
-    def reserve_capacity(self, contracts):
+    def reserve_capacity(self, contracts, letter):
         s = 0
+        # loop through contracts
         for i in contracts:
-            s+=i[5]
+            # check for starting letter of send to address for network
+            if i[4][0] == letter:
+                s+=i[5]
             
         self.reserve_capacity = s
         

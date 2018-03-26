@@ -3,8 +3,8 @@ import requests
 
 class Conversion:
     def __init__(self, a="ARK", b="KAPU"):
-        self.a = a
-        self.b = b
+        self.a = self.testing(a)
+        self.b = self.testing(b)
 
     def conversion_rate(self):
         url = "https://min-api.cryptocompare.com/data/pricemulti"
@@ -20,3 +20,14 @@ class Conversion:
         self.conversion_rate = r.json()[self.b][tsyms] / r.json()[self.a][tsyms]
         
         return self.conversion_rate 
+    
+    def testing(self, a):
+        # Convert for coins that don't have exchanges for testing
+        test = {'dkapu': 'kapu', 
+                   'dark': 'ark',
+                   'persona-t': 'kapu'}
+        
+        if a in test.keys():
+            return test[a].upper()
+        else:
+            return a.upper()
