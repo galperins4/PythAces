@@ -16,10 +16,21 @@ app = Flask(__name__)
 def home():
     pass
 
-@app.route("/<coin>")
+@app.route("/<coin>", methods=['GET','POST'])
 def coin(coin):
-    #
-
+    if request.method == 'POST':
+        # get send/receive addresses and amouunt
+        
+        
+        # do validations
+        
+        # calculate value
+        
+        #create contract
+        
+        #return json
+    page = request.args.get('page', default = 1, type = int) 
+    filter = request.args.get('filter', default = '*', type = str)
 
 #display all prices
 @app.route("/prices")
