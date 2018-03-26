@@ -14,15 +14,17 @@ app = Flask(__name__)
 @app.route("/")
 #main landing page
 def home():
+	
     pass
 
 @app.route("/coin", methods=['POST'])
 def coin():
+	
 	# get send/receive addresses and amouunt
-	print(request.json()
+	print(request.json())
 	send = request.args.get("send", type=str)
 	recieve = request.args.get("receive", type=str)
-       amount = request.args.get("amount", type=float)
+        amount = request.args.get("amount", type=float)
         
         
         # do validations
