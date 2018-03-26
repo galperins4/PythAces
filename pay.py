@@ -86,6 +86,7 @@ def net_filter(p):
 '''
 def letter(l):
     
+    print(l)
     for k,v in coin.items():
         if v.get("addr_start") == l:
             n = k
