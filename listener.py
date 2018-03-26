@@ -12,7 +12,7 @@ def get_dbname():
     if  data['channel'] in ark_fork:
         uname = data['dbusername']
     else:
-        uname = network[data['channel']['db_user']]
+        uname = network[data['channel']]['db_user']
         
     return uname
 
@@ -24,8 +24,7 @@ if __name__ == '__main__':
     # initialize db connection
     #check for special usernames needed for lisk forks
     username = get_dbname()
-    print(username)
-    db = DB(network[data['channel']['db']], username, network[data['channel']['db_pw']])
+    db = DB(network[data['channel']]['db'], username, network[data['channel']]['db_pw'])
  
     # connect to contracts database and get last row of tx
     acesdb = AceDB(data['dbusername'])
