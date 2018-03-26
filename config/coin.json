@@ -4,11 +4,11 @@
       "service_acct": "ZUFE6zsBwtwUaH53544sqJSuLga2WqjhZi",
       "service_account_passphrase": "passphrase",
       "service_account_secondphrase": "None",
-      "addr_start": "Z"}
+      "addr_start": "Z"},
   "persona-t":{
       "relay_ip": "5.135.75.65",
       "service_acct": "Tuzqnw9MatBmE1DH8Cof2kzj5vx85iue2S",
       "service_account_passphrase": "passphrase",
       "service_account_secondphrase": "None",
-      "addr_start": "T"}}
+      "addr_start": "T"}
 }
