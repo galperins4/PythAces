@@ -13,7 +13,7 @@ def get_network(d, n, ip="localhost"):
         ip,
         n[d]['port'],
         n[d]['nethash'],
-        n[d]['network']['version']
+        n[d]['version']
     )
 
 def parse_config():
