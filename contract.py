@@ -38,7 +38,7 @@ if __name__ == '__main__':
     for key in coin:
         pythaces = Pythaces(fx_coins[key], atomic)
         # total capacity
-        capacity = pythaces.service_capacity(coin[key]['service_account'])
+        capacity = pythaces.service_capacity(coin[key]['service_acct'])
         # reserve capacity
         reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
         #available capacity
