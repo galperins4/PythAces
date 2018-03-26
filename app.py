@@ -18,8 +18,7 @@ def home():
     pass
 
 @app.route("/coin", methods=['POST'])
-def coin():
-	
+def coin():	
 	# get send/receive addresses and amouunt
 	print(request.json())
 	send = request.args.get("send", type=str)
