@@ -16,10 +16,13 @@ app = Flask(__name__)
 def home():
     pass
 
-@app.route("/<coin>", methods=['GET','POST'])
-def coin(coin):
-    if request.method == 'POST':
-        # get send/receive addresses and amouunt
+@app.route("/coin", methods=['POST'])
+def coin():
+	# get send/receive addresses and amouunt
+	print(request.json()
+	send = request.args.get("send", type=str)
+	recieve = request.args.get("receive", type=str)
+       amount = request.args.get("amount", type=float)
         
         
         # do validations
@@ -27,40 +30,7 @@ def coin(coin):
         # calculate value
         
         #create contract
-        
-        #return json
-    page = request.args.get('page', default = 1, type = int) 
-    filter = request.args.get('filter', default = '*', type = str)
-
-#display all prices
-@app.route("/prices")
-def prices():
-    
-    try:
-        #pythaces class
-        conv = Conversion()
-        
-        conversion_rate = conv.conversion_rate()
-           
-        priceDict = {
-                "Address": A['service_acct'],
-                "Conversion Rate":  conversion_rate,
-                "Flat fee": data['flat_fee'],
-                "Percent fee": data['pct_fee']
-                }
-    
-    except:
-        print("Error")
-    
-
-    return jsonify(Prices=priceDict)
-
-#Change this to just send contracts
-@app.route('/contracts', methods=['GET','POST']) 
-def contracts():
-    print(request.json)
-    
-    '''
+        '''
     c = Contract()
     c.create(ts, send_address, send_amount, receive_addr, receive_amount, total_fee)
     test = (c.contract,)
@@ -68,34 +38,65 @@ def contracts():
     print("Contract Stored!")
     '''
     
+    #return json to client (address, amount, vendorfield)
     return json.dumps(request.json)
+
+#display all prices
+@app.route("/prices")
+def prices():
+    
+    try:
+    	
+    	conversion_rates = {} 
+        # get conversion rates
+        for key in coin:
+        	cnv = Conversion(data['channel'], key)
+        	conversion_rates[key] = cnv.conversion_rate()
+        # get fees	
+        feeDict = {
+                "Flat fee": data['flat_fee'],
+                "Percent fee": data['pct_fee']
+                }
+                
+        priceDict = {
+                "prices": conversion_rates,
+                "fees": feeDict
+                
+        return jsonify(Prices=priceDict)
+    
+    except:
+         error ={"Status":"Unsuccessful")
+        return jsonify(Error=error)
+
+#Change this to just send contracts
+@app.route('/contracts') 
+def contracts():
+    pass
 
 #get all capacity
 @app.route("/capacity")
 def capacity():
     try:
-        #pythaces class
-        b = get_network(B, network, B['relay_ip'])
-        pythaces = Pythaces(b, atomic)
+        service_availability = {}
+    contracts = acesdb.unprocessedContracts()
     
-        capacity = pythaces.service_capacity(B['service_acct'])
-        
-        #reserved_capacity = 
-        contracts = acesdb.unprocessedContracts()
-        reserved = pythaces.reserve_capacity(contracts)
-    
-        #available_capacity = 
+    for key in coin:
+        pythaces = Pythaces(fx_coins[key], atomic)
+        # total capacity
+        capacity = pythaces.service_capacity(coin[key]['service_acct'])
+        # reserve capacity
+        reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
+        #available capacity
         available = pythaces.available_capacity()
-    
-        capDict = {
-                "Total Capacity": capacity,
-                "Reserved Capacity": reserved,
-                "Avaiable Capacity": available}
         
+        service_availability[key] = {"Total Capacity": capacity,
+                                    "Reserved Capacity": reserved,
+                                    "Available Capcity": available}
+        
+        return jsonify(Capacity=service_availability)
     except:
-        print("Unsuccessful")
-        
-    return jsonify(Capacity=capDict)
+    	error ={"Status":"Unsuccessful")
+        return jsonify(Error=error)
 
 if __name__ == "__main__":
     # get config data
@@ -110,4 +111,10 @@ if __name__ == "__main__":
     
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(data['dbusername'])
+    
+    #initialize park objects for use
+    fx_coins = {}
+    for key in coin:
+        fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
+      
     app.run(host = data['channel_ip'], threaded=True)
