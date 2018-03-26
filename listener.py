@@ -70,7 +70,7 @@ if __name__ == '__main__':
                         if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
                             #store payment and mark as processed
-                            msg = "Thanks for using PythAces - contract "+c[0]
+                            msg = "Pythaces contract-"+c[0]
                             acesdb.storePayment(c[0], c[4], c[5], msg)
                             acesdb.markAsProcessed(c[0])
             #increment rows processed
