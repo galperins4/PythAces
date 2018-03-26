@@ -51,8 +51,10 @@ if __name__ == '__main__':
     print(service_availability)
     
     conversion_rates = {}
+   
     for key in coin:
-        conversion_rates[key] = pythaces.conversion_rate(data['channel'], key)
+        cr = Contract(data['channel'], key)
+        conversion_rates[key] = cr.conversion_rate(data['channel'], key)
     
     print(conversion_rates)
 
