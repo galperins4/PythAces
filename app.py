@@ -67,7 +67,7 @@ def prices():
         return jsonify(Prices=priceDict)
     
     except:
-         error ={"Status":"Unsuccessful")
+         error ={"Status":"Unsuccessful"}
         return jsonify(Error=error)
 
 #Change this to just send contracts
@@ -97,7 +97,7 @@ def capacity():
         
         return jsonify(Capacity=service_availability)
     except:
-    	error ={"Status":"Unsuccessful")
+    	error ={"Status":"Unsuccessful"}
         return jsonify(Error=error)
 
 if __name__ == "__main__":
