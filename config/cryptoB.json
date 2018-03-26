@@ -1,8 +1,0 @@
-{
-  "dbusername": "galp",
-  "network": "kapu",
-  "relay_ip": "x.x.x.x",
-  "service_acct": "addr2",
-  "service_account_passphrase": "passphrase",
-  "service_account_secondphrase": "None"
-  }
