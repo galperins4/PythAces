@@ -65,8 +65,6 @@ if __name__ == '__main__':
                     for tx in transactions:
                         #note t[0] is tx
                         #check if contract matches vendor field
-                        print(c[3])
-                        print(tx[3])
                         if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
                             #store payment and mark as processed
