@@ -36,7 +36,7 @@ if __name__ == '__main__':
     contracts = acesdb.unprocessedContracts()
     
     for key in coin:
-        pythaces = Pythaces(fx_coins['key'], atomic)
+        pythaces = Pythaces(fx_coins[key], atomic)
         # total capacity
         capacity = pythaces.service_capacity(coin[key]['service_account'])
         # reserve capacity
