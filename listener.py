@@ -12,7 +12,7 @@ def get_dbname():
     if  data['channel'] in ark_fork:
         uname = data['dbusername']
     else:
-        uname = network[data['channel']['db_user']
+        uname = network[data['channel']['db_user']]
         
     return uname
 
