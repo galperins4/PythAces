@@ -179,7 +179,6 @@ if __name__ == '__main__':
                     # get first letter of send to address to find network
                     n_letter = i[2][0]
                     net = letter(n_letter)
-                    print(net)
                     #instantiate park object
                     park = fx_coins[net]                    
                     # get passphrases
