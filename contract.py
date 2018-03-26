@@ -3,6 +3,7 @@
 from core.acedb import AceDB
 from core.pythaces import Pythaces
 from core.contracts import Contract
+from core.conversion import Conversion
 from pay import parse_config, get_network
 import time
 import os.path
@@ -53,8 +54,8 @@ if __name__ == '__main__':
     conversion_rates = {}
    
     for key in coin:
-        cr = Contract(data['channel'], key)
-        conversion_rates[key] = cr.conversion_rate(data['channel'], key)
+        cnv = Conversion(data['channel'], key)
+        conversion_rates[key] = cnv.conversion_rate(data['channel'], key)
     
     print(conversion_rates)
 
