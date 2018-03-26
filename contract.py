@@ -12,39 +12,50 @@ atomic = 100000000
 if __name__ == '__main__':
     
     # get config data
-    data, network, A, B = parse_config()
-    
-    #listener listens from cryptoA
-    # check to see if ark.db exists, if not initialize db, etc
+    data, network, coin = parse_config()
+
+    # check to see if db exists, if not initialize db, etc
     if os.path.exists('aces.db') == False:    
-        acesdb = AceDB(A['dbusername'])
+        acesdb = AceDB(data['dbusername'])
         # initalize sqldb object
         acesdb.setup()
     
     # check for new rewards accounts to initialize if any changed
-    acesdb = AceDB(A['dbusername'])
+    acesdb = AceDB(data['dbusername'])
     
     #Get capacity stats
-    #pythaces class
-    coina = get_network(A, network, A['relay_ip'])
-    coinb = get_network(B, network, B['relay_ip'])
+    #pythaces class - need list of eligable coins for parks
     
-    pythaces = Pythaces(coinb, atomic)
-    capacity = pythaces.service_capacity(B['service_acct'])
-    print("Total Capacity: ", capacity)
+    fx_coins = {}
+    for key in coin:
+        fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
     
-    #reserved_capacity = 
+    print(fx_coins)
+    
+    service_availability = {}
     contracts = acesdb.unprocessedContracts()
-    reserved = pythaces.reserve_capacity(contracts)
-    print("Reserved Capacity: ", reserved)
     
-    #available_capacity = 
-    available = pythaces.available_capacity()
-    print("Available Capcity: ", available)
+    for key in coin:
+        pythaces = Pythaces(fx_coins['key'], atomic)
+        # total capacity
+        capacity = pythaces.service_capacity(coin[key]['service_account'])
+        # reserve capacity
+        reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
+        #available capacity
+        available = pythaces.available_capacity()
+        
+        service_availability[key] = {"Total Capacity": capacity,
+                                    "Reserved Capacity": reserved,
+                                    "Available Capcity": available}
     
-    conversion_rate = pythaces.conversion_rate()
-    print(conversion_rate)
+    print(service_availability)
     
+    conversion_rates = {}
+    for key in coin:
+        conversion_rates[key] = pythaces.conversion_rate(data['channel'], key)
+    
+    print(conversion_rates)
+
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())
     receive_addr = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
@@ -53,7 +64,7 @@ if __name__ == '__main__':
     
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
     # send_amt = 250
-    converted_amount = receive_amount * conversion_rate
+    converted_amount = receive_amount * conversion_rates['kapu']
     f_fee = data['flat_fee'] * atomic
     p_fee = data['pct_fee'] * converted_amount
     total_fee = int((p_fee + f_fee))

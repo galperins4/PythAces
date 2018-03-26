@@ -6,10 +6,22 @@ from core.conversion import Conversion
 from pay import parse_config, get_network
 import time
 import os.path
+
 atomic = 100000000
 
 app = Flask(__name__)
 
+@app.route("/")
+#main landing page
+def home():
+    pass
+
+@app.route("/<coin>")
+def coin(coin):
+    #
+
+
+#display all prices
 @app.route("/prices")
 def prices():
     
@@ -32,7 +44,8 @@ def prices():
 
     return jsonify(Prices=priceDict)
 
-@app.route('/contracts', methods=['POST']) 
+#Change this to just send contracts
+@app.route('/contracts', methods=['GET','POST']) 
 def contracts():
     print(request.json)
     
@@ -46,6 +59,7 @@ def contracts():
     
     return json.dumps(request.json)
 
+#get all capacity
 @app.route("/capacity")
 def capacity():
     try:
@@ -74,15 +88,15 @@ def capacity():
 
 if __name__ == "__main__":
     # get config data
-    data, network, A, B = parse_config()
+    data, network, coin = parse_config()
     
     #listener listens from cryptoA
     # check to see if ark.db exists, if not initialize db, etc
     if os.path.exists('aces.db') == False:    
-        acesdb = AceDB(A['dbusername'])
+        acesdb = AceDB(data['dbusername'])
         # initalize sqldb object
         acesdb.setup()
     
     # check for new rewards accounts to initialize if any changed
-    acesdb = AceDB(A['dbusername'])
-    app.run(host = "xx.xx.xx.xx")
+    acesdb = AceDB(data['dbusername'])
+    app.run(host = data['channel_ip'], threaded=True)

@@ -3,7 +3,7 @@
 from core.acedb import AceDB
 from park.park import Park
 # from liskbuilder.transaction import TransactionBuilder
-import random
+# import random
 import time
 import json
 
@@ -11,9 +11,9 @@ def get_network(d, n, ip="localhost"):
 
     return Park(
         ip,
-        n[d['network']]['port'],
-        n[d['network']]['nethash'],
-        n[d['network']]['version']
+        n[d]['port'],
+        n[d]['nethash'],
+        n[d]['network']['version']
     )
 
 def parse_config():
@@ -26,22 +26,31 @@ def parse_config():
     with open('config/networks.json') as network_file:
         network = json.load(network_file)
         
-    with open('config/cryptoA.json') as A:
-        cryptoA = json.load(A)
+    with open('config/coin.json') as coin_file:
+        coin = json.load(coin_file)
         
-    with open('config/cryptoB.json') as B:
-        cryptoB = json.load(B)
-        
-    return data, network, cryptoA, cryptoB
+    return data, network, coin
 
+def get_passphrases(c):
+    # Get the passphrase
+    passphrase = coin[c]['service_account_passphrase']
+    
+    # Get the second passphrase
+    secondphrase = coin[c]['service_account_secondphrase']
+    if secondphrase == 'None':
+        secondphrase = None
+
+    return passphrase, secondphrase
+
+'''
 def get_peers(park):
     peers = []
-    '''
+    
     try:
         peers = park.peers().peers()['peers']
         print('peers:', len(peers))
     except BaseException:
-    '''
+    
     # fall back to delegate node to grab data needed
     bark = get_network(B, network, data['pay_relay_ip'])
     peers = bark.peers().peers()['peers']
@@ -74,7 +83,15 @@ def net_filter(p):
         print('filtered peers', len(final))
         
     return final
+'''
+def letter(l):
+    
+    for k,v in coin.items():
+        if v.get("addr_start") == l:
+            n = k
 
+    return n
+'''
 def broadcast(tx, p, park, r):
     records = []
     # take peers and shuffle the order
@@ -88,12 +105,12 @@ def broadcast(tx, p, park, r):
         peer_cast = p[0:r]
 
     #broadcast to localhost/relay first
-    '''try:
+    try:
         transaction = park.transport().createBatchTransaction(tx)
         records = [[j['vendorField'],j['recipientId'],j['amount'],j['id']] for j in tx]
         time.sleep(1)
     except BaseException:
-    '''
+    
     # fall back to delegate node to grab data needed
     bark = get_network(B, network, data['pay_relay_ip'])
     bark.transport().createBatchTransaction(tx)
@@ -113,7 +130,7 @@ def broadcast(tx, p, park, r):
             time.sleep(1)
         except:
             print("error")
-        
+'''        
 if __name__ == '__main__':
    
     lisk_fork = {'oxy-t':'oxy', 
@@ -129,48 +146,62 @@ if __name__ == '__main__':
                 'lisk-t': 'lisk',
                 'lisk' : 'lisk'}
     
-    data, network, A, B = parse_config()
-    acedb = AceDB(A['dbusername'])
-    
-    # Get the passphrase from config.json
-    passphrase = B['service_account_passphrase']
-    # Get the second passphrase from config.json
-    secondphrase = B['service_account_secondphrase']
-    if secondphrase == 'None':
-        secondphrase = None
-    
+    data, network, coin = parse_config()
+    acedb = AceDB(data['dbusername'])
     reach = data['reach']
-    park = get_network(B, network, data['pay_relay_ip'])
-
+    
+    fx_coins = {}
+    for key in coin:
+        fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
+    
+    '''
     if B['network'] in lisk_fork.keys():
         netname = lisk_fork[B['network']]
-
+    '''
     while True:
         # get peers
-        signed_tx = []
-        unique_contracts = []
+        #signed_tx = []
+        #unique_contracts = []
         
         # check for unprocessed payments
-        if B['network'] in lisk_fork.keys():
-            unprocessed_pay = acedb.stagedLiskPayment().fetchall()
+        if data['channel'] in lisk_fork.keys():
+            pass
+            #unprocessed_pay = acedb.stagedLiskPayment().fetchall()
         else:
             unprocessed_pay = acedb.stagedArkPayment().fetchall()
+
         # query not empty means unprocessed blocks
         if unprocessed_pay:
-            p = get_peers(park)
-            unique_contracts = [y[1] for y in unprocessed_pay]
-            for i in unprocessed_pay:
-                if B['network'] in lisk_fork.keys():
-                    tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
-                else:
-                    tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
-          
-                signed_tx.append(tx)
-            acedb.processStagedPayment(unique_contracts)
-            quit()
             
-            broadcast(signed_tx, p, park, reach)
-            acedb.processStagedPayment(unique_contracts)
+            for i in unprocessed_pay:
+                if data['channel'] in lisk_fork.keys():
+                    pass
+                    #tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
+                else:
+                    # get first letter of send to address to find network
+                    n_letter = i[2][0]
+                    net = letter(n_letter)
+                    #instantiate park object
+                    park = fx_coins[net]                    
+                    # get passphrases
+                    pp, sp = get_passphrases[net]
+                    #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
+                    transaction = park.transaction().create(i[2], str(i[3]), i[4], pp, sp)
+                    print(transaction)
+                    #transaction = park.transactions().create('address', 'amount', 'vendor', 'secret', 'second secret')
+                    
+                    #assuming transaction is good, update staged record for this contract
+                    acedb.processStagedPayment(i[1])
+                    
+                    
+                    #tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], passphrase, secondphrase)
+          
+                #signed_tx.append(tx)
+            
+            # p = get_peers(park)
+            
+            #broadcast(signed_tx, p, park, reach)
+            #acedb.processStagedPayment(i[1])
 
             # payment run complete
             print('Payment Run Completed!')

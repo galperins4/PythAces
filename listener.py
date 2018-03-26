@@ -9,7 +9,7 @@ atomic = 100000000
  
 def get_dbname():
     ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
-    if  A['network'] in ark_fork:
+    if  data['channel'] in ark_fork:
         uname = A['dbusername']
     else:
         uname = network[A['network']]['db_user']
@@ -19,15 +19,15 @@ def get_dbname():
 if __name__ == '__main__':
     
     # get config data
-    data, network, A, B = parse_config()
+    data, network, coin = parse_config()
 
     # initialize db connection
     #check for special usernames needed for lisk forks
     username = get_dbname()
-    db = DB(network[A['network']]['db'], username, network[A['network']]['db_pw'])
+    db = DB(network[data['channel']['db']], username, network[data['channel']['db_pw']])
  
     # connect to contracts database and get last row of tx
-    acesdb = AceDB(A['dbusername'])
+    acesdb = AceDB(data['dbusername'])
     
     check_start = acesdb.getRows().fetchall()
     
@@ -65,7 +65,7 @@ if __name__ == '__main__':
                     for tx in transactions:
                         #note t[0] is tx
                         #check if contract matches vendor field
-                        if c[0] == tx[5] and c[2] == tx[1] and A["service_acct"] == tx[2] and c[3] == tx[3]:
+                        if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
                             #we have a match - mark as processed and move to staging
                             #store payment and mark as processed
                             msg = "Thanks for using PythAces - contract "+c[0]
