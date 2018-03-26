@@ -10,9 +10,9 @@ atomic = 100000000
 def get_dbname():
     ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     if  data['channel'] in ark_fork:
-        uname = A['dbusername']
+        uname = data['dbusername']
     else:
-        uname = network[A['network']]['db_user']
+        uname = network[data['channel']['db_user']
         
     return uname
 
