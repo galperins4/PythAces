@@ -62,7 +62,7 @@ def prices():
                 
         priceDict = {
                 "prices": conversion_rates,
-                "fees": feeDict
+                "fees": feeDict}
                 
         return jsonify(Prices=priceDict)
     
