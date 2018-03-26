@@ -61,21 +61,18 @@ if __name__ == '__main__':
 
     # get requested info for listener CURRENTLY HARDCODED FOR TESTING
     ts = int(time.time())
-    receive_addr = "DGExsNogZR7JFa2656ZFP9TMWJYJh5djzQ"
+    receive_addr = "TjUBmBaNeCchtSqEMxAE7PHZhDsiomkVxr"
     receive_amount = 250 * atomic
-    print(receive_amount)
     
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
     # send_amt = 250
-    converted_amount = receive_amount * conversion_rates['dkapu']
+    converted_amount = receive_amount * conversion_rates['persona-t']
     f_fee = data['flat_fee'] * atomic
     p_fee = data['pct_fee'] * converted_amount
     total_fee = int((p_fee + f_fee))
-    print(total_fee)
     
     
     send_amount = int((converted_amount)) + total_fee
-    print(send_amount)
     
     #insantiate new contract object
     c = Contract()
