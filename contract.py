@@ -55,7 +55,7 @@ if __name__ == '__main__':
    
     for key in coin:
         cnv = Conversion(data['channel'], key)
-        conversion_rates[key] = cnv.conversion_rate(data['channel'], key)
+        conversion_rates[key] = cnv.conversion_rate()
     
     print(conversion_rates)
 
@@ -67,7 +67,7 @@ if __name__ == '__main__':
     
     send_address = "DS2YQzkSCW1wbTjbfFGVPzmgUe1tNFQstN"
     # send_amt = 250
-    converted_amount = receive_amount * conversion_rates['kapu']
+    converted_amount = receive_amount * conversion_rates['dkapu']
     f_fee = data['flat_fee'] * atomic
     p_fee = data['pct_fee'] * converted_amount
     total_fee = int((p_fee + f_fee))
