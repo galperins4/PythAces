@@ -85,14 +85,9 @@ def net_filter(p):
     return final
 '''
 def letter(l):
-    
-    print(l)
     for k,v in coin.items():
        if v.get("addr_start") == l:
            return k
-       else:
-           print("Error - Not Found")
-           quit()
     
 '''
 def broadcast(tx, p, park, r):
