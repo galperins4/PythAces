@@ -19,7 +19,7 @@ class Contract:
         cnv = Conversion(a, b)
         
         rate= cnv.conversion_rate()
-        convert_amount = amt*rate*atomic
+        convert_amount = amt*rate
         
         f_fee = fees['flat_fee']*atomic
         p_fee = fees['pct_fee']*convert_amount
