@@ -16,9 +16,8 @@ class Contract:
         return self.contract
        
     def pricing(self,a,b,amt,fees):
-    	cnv = Conversion(a, b)
-        rate = cnv.conversion_rate()
-        
+        cnv = Conversion(a, b)
+        rate= cnv.conversion_rate()
         convert_amount = amt*rate*atomic
         
         f_fee = fees['flat_fee']*atomic
