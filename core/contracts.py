@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from uuid import uuid4
-from PythAces.core.conversion import Conversion
+from .conversion import Conversion
 atomic = 100000000
 
 
