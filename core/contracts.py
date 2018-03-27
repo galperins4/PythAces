@@ -27,7 +27,7 @@ class Contract:
         f_fee = fees['flat_fee']*atomic
         p_fee = fees['pct_fee']*convert_amount
         total_fee = int((p_fee + f_fee))
-        send_amount = int((converted_amount)) + total_fee
+        send_amount = int((convert_amount)) + total_fee
         
         return send_amount, total_fee
     	
