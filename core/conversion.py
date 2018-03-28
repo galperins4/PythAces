@@ -17,7 +17,7 @@ class Conversion:
         
         r = requests.get(url, params=params)
         
-        self.conversion_rate = r.json()[self.b][tsyms] / r.json()[self.a][tsyms]
+        self.conversion_rate = round((r.json()[self.b][tsyms] / r.json()[self.a][tsyms]),2)
         
         return self.conversion_rate 
     
