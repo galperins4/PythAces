@@ -8,7 +8,7 @@ atomic = 100000000
 class Contract:
     def __init__(self):
         self.contract = ()
-        self.uid = str(uuid4(), "utf-8")
+        self.uid = str(uuid4())
         self.contract = self.contract + (self.uid,)
         
     def create(self, ts, saddr, samt, raddr, ramt, fee):
