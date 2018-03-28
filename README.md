@@ -4,8 +4,8 @@
 
 ```sh
 install and sync relay server
-git clone https://github.com/galperins4/tbw
-cd ~/tbw
+git clone https://github.com/galperins4/PythAces 
+cd ~/PythAces
 pip3 install setuptools
 pip3 install -r requirements.txt
 nano package.json (see configuration below)
