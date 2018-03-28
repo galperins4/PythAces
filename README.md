@@ -20,43 +20,24 @@ Important! - pay_addresses and keep keys should match in config.json. DO NOT del
 
 As the script leverages @FaustBrians ARK python client as well as database retreival and storage classes, python 3.6+ is required. In addition it is  now required to run this alongside an ark/kapu relay node given the DB interaction and little reliance on the API.
 
-## Available Configuration Options (TRUE BLOCK WEIGHT)
-- netork: which network(options are ark, dark, kapu, lwf, lwf-t, oxy, oxy-t, onz, onz-t, shift, shift-t, rise, rise-t)
-- start_block: script will start calculations only for blocks after specified start block
-- delegate IP: this serves as a back-up IP for the API to call to in case the localhost does not respond
-- dbusername: this is the postgresql database username nodeDB (usually your os username)
-- publicKey: delegate public key
-- interval:  the interval you want to pay voters in blocks. A setting of 211 would pay ever 211 blocks (or 422 ark)
-- voter_share: percentage to share with voters (0.xx format)
-- passphrase: delegate passphrase
-- secondphrase: delegate second passphrase
-- voter_msg: ARK and ARKfork coins only - message you want in vendor field for share payments
-- block_check: How often you want the script to check for new blocks in seconds. Recommend low value (e.g., 30 seconds for ARK coins, high value for LISK coins)
-- cover_tx_fees: Use this to indicate if you want to cover transaction fees (Y) or not (N)
-- vote_cap: Use this if you cap voters for how much they can earn with votes. For example 10000 will mean any wallet over 10K will only be paid based on 10K weight
-- vote_min: Use this if you have a minumum wallet balance to be eligible for payments
-- blacklist: Options are block or assign. Block zero's out blocked accounts which then distributes their earnings to voters. Assign does the same but assigns weight to a designated account. 
-- blacklist_addr: comma seperated list of addresses to block from voter payments
-- blacklist_assign: if assign option is picked, this is the address those blacklisted shares go to. DO NOT SET to an account voting for said delegate. It is HIGHLY recommended this is set to the reserve address!
-- fixed_deal: use this if you have a fixed deal with a voter (e.g., 45 ark per day).
-- fixed_deal_amt: format is address:amount. The amount to pay should correspond to interval. 
-- min_payment: Minimum threshold for payment. If set to 1, any payout less than 1 ARK will be held until the next pay run and accumulate
-- reach: how many peers to broadcast payments to (Recommended - 20)
-- keep: there are the percentages for delegates to keep and distrubute among x accounts (Note: reserve is required! all others are optional)
-- pay_addresses: these are the addresses to go with the keep percentages (Note: reserve is required! all others are optional)
+## Available Configuration Options (config.json)
+- channel: dpos channel for inbound transactions (currently support ark/dark, kapu/dkapu, persona-t)
+- channel_ip: ip address of node
+- service_acct: service account for inbound transactions for the channel 
+- db_username: os username
+_ flat_fee: flat fee per transaction
+- pct_fee: percentage fee per transaction
 
-## Available Configuration Options (POOL)
-- netork: which network(options are ark, dark, kapu, lwf, lwf-t, oxy, oxy-t, onz, onz-t, shift, shift-t, rise, rise-t)
-- pool_ip: IP of the node the pool is installed on
-- explorer: The address of the explorer for the coin
-- coin: which coin (e.g., ARK, KAPU)
-- proposal: link to delegate proposal (if any)
-- dbusername: this is the postgresql database username nodeDB (usually your os username)
+## Available Configuration Options (coin.json) - per coin supported 
+- relay_ip: relay to broadcast outbound transactions
+- service_acct: outbound service account 
+- service_account_passphrase: passphrase 
+- service_account_secondphrase: secondphrase 
+- addr_start: letter addresses start with
 
-Note: Pool runs on port 5000
+Note: Pythaces runs on port 5000
 
-## To Do
-
+## To Do 
 - Add more features as necessary
 - Additional exception handling and validators
 - Add more dpos coins
