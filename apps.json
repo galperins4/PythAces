@@ -18,7 +18,7 @@
 	"interpreter_args": "-u"
     },
     {
-        "name": "pool",
+        "name": "listener",
         "script": "~/PythAces/listener.py",
         "instances": 1,
         "exec_mode": "fork",
