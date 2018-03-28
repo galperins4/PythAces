@@ -16,7 +16,7 @@ sudo npm install pm2@latest -g
 
 After the repository has been cloned you need to open the `config.json` / `coin.json` and change it to your liking. Once this has been done execute the pm2 command `pm2 start apps.json`to start the script. 
 
-As the script leverages @FaustBrians ARK python client as well as database retreival and storage classes, python 3.6+ is required. In addition it is required  to run this alongside an ark/kapu elay node given the DB interaction and little reliance on the API.
+As the script leverages @FaustBrians ARK python client as well as database retreival and storage classes, python 3.6+ is required. In addition a relay node of the channel coin is required.
 
 ## Available Configuration Options (config.json)
 - channel: dpos channel for inbound transactions (currently support ark/dark, kapu/dkapu, persona-t)
