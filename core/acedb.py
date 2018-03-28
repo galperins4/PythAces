@@ -115,12 +115,4 @@ class AceDB:
         
         self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract = '{contract}'")
         self.commit()
-            
-        '''
-        for i in contracts:
-            self.cursor.execute(f"UPDATE staging SET processed_at = '{ts}' WHERE contract = '{i}'")
-            self.commit()
-        '''
-
-
 
