@@ -1,4 +1,4 @@
-# Python True Block Weight
+# Python ACES adaptation
 
 ## Installation
 
@@ -8,14 +8,11 @@ git clone https://github.com/galperins4/PythAces
 cd ~/PythAces
 pip3 install setuptools
 pip3 install -r requirements.txt
-nano package.json (see configuration below)
 npm install
 sudo npm install pm2@latest -g (if using pm2)
 ```
 
-## Configuration & Usage
-
-Before runnning npm install update package.json by removing the line for the unneeded depency. Keep ark for ark/kapu support and lwf for lwf support
+## Configuration & Usage 
 
 After the repository has been cloned you need to open the `config.json` / `pool.json` and change it to your liking. Once this has been done execute `python3 tbw.py` to start true block weight script. After the initial start up, you can run the script via `python3 tbw.py` or the pm2 command `pm2 start apps.json`
 
@@ -61,56 +58,9 @@ Note: Pool runs on port 5000
 ## To Do
 
 - Add more features as necessary
-- Additional exception handling
-
-## Changelog
-
-### 1.1
-- Added anti-dilution for min-payout config. Now wallets under min payment aren't diluted when wallets above min payout are paid
-- Added super basic front end website for pool runners. See config details above
-- Added support for Shift and Rise (mainnet and testnets)
-
-### 1.0
-- NOTE: V1.0 made changes to database structure. As such, upgrades from 0.9 and below need to pay out old version (can force it with manual.py or wait until next payrun to switch over) balances and reinitilaize ark.db with v1.0
-- added start_block config
-- seperated dependency of pay.py on tbw.py. tbw and pay both run via pm2. Pay looks for pay files every 5 minutes and executes
-- streamlined payment tx creation. Script now batches 40 tx per run and then pauses 5 minutes
-
-### 0.9
-- added support for lwf testnet and mainnet
-- added support for oxy testnet and mainnet
-- added suppport for onz testnet and mainnet
-- added configurable block check option
-- added configurable voter share message (ARK coins only)
-
-### 0.8
-- added vote-min option to allow for minimum wallet balances eligible for payouts
-
-### 0.7
-- small fix for 0 balances in delegate rewards due to changed/unused addresses to prevent broadcasting issues
-
-### 0.6
-- Added fixed deal options
-- Added functionality for paying (or not paying) transaction fees on share payments
-- Added reserve balance check - will not payout if your reserve account <=0 on payrun
-- Added manual.py - This will let you pay manually based on values in ark.db (will also update db)
-
-### 0.5
-- Completely rewritten to pull data directly from node database for TBD
-- Added blacklist functionality
-
-### .05
-- Added functionality to cap voters for distributions
-
-### .04
-- Squashed import on payment interval bug
-- Added file to allow tbw to run via pm2 
-
-### .03
-- Modified config file to add minimum payment threshold functionality
-
-### .02
-- Modified config file and added multi-address capability for delegate share addresses
+- Additional exception handling and validators
+- Add more dpos coins
+- Add non-DPOS coins 
 
 ### .01
 - Initial release
