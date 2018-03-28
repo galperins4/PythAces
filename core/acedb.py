@@ -90,8 +90,9 @@ class AceDB:
         self.commit()
         
     def expireContract(self, contract):
+        ts = int(time.time())
         expired = "Expired"
-        self.cursor.execute(f"UPDATE contracts SET status = '{expired}', processed_at = '{expired}' WHERE contract = '{contract}'")
+        self.cursor.execute(f"UPDATE contracts SET status = '{expired}', processed_at = '{ts}' WHERE contract = '{contract}'")
         self.commit()
         
     def contracts(self):
