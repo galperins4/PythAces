@@ -42,7 +42,7 @@ Note: Pythaces runs on port 5000
 - Add more dpos coins
 - Add non-DPOS coins 
 
-### .01
+### v0.0.1
 - Initial release
 
 ## Support
@@ -59,7 +59,9 @@ If you discover a security vulnerability within this package, please open an iss
 
 ## Credits
 
-- [galperins4](https://github.com/galperins4)
+
+- Frontend: [ArkMoon](https://github.com/arkmoon)
+- Backend: [galperins4](https://github.com/galperins4)
 - [All Contributors](../../contributors)
 
 ## License
