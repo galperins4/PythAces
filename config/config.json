@@ -1,5 +1,6 @@
 {
   "channel": "dark",
+  "addr_start": "D",
   "channel_ip": "xx.xx.xx.xx",
   "service_acct": "addr1",
   "dbusername": "galp",
