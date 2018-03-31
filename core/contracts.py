@@ -21,8 +21,8 @@ class Contract:
         rate= cnv.conversion_rate()
         convert_amount = amt*rate
         
-        f_fee = fees['flat_fee']*atomic
-        p_fee = fees['pct_fee']*convert_amount
+        f_fee = fees['flatFee']*atomic
+        p_fee = fees['pctFee']*convert_amount
         total_fee = int((p_fee + f_fee))
         send_amount = int((convert_amount)) + total_fee
         
