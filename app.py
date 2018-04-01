@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, json, request, render_template, redirect
+from flask import Flask, jsonify, request, redirect
 from flask_cors import CORS
 from core.acedb import AceDB
 from core.pythaces import Pythaces
@@ -21,47 +21,53 @@ def home():
 
 @app.route("/<coin>", methods=['POST'])
 def crypto(coin):
-    # get send/receive addresses and amouunt
-    req_data = request.get_json()
-    send = req_data['send']
-    receive = req_data["receive"]
-    amount = req_data["amount"]*atomic
-    # do validations
-    c1, c1_msg = validate_addresses(coin,send,receive)
-    c2, c2_msg = validate_amount(coin,amount)
+    try:
+        # get send/receive addresses and amouunt
+        req_data = request.get_json()
+        send = req_data['send']
+        receive = req_data["receive"]
+        amount = req_data["amount"]*atomic
+        # do validations
+        c1, c1_msg = validate_addresses(coin,send,receive)
+        c2, c2_msg = validate_amount(coin,amount)
 
-    a_check = all([c1, c2])
+        a_check = all([c1, c2])
 
-    if a_check == True:
+        if a_check == True:
     
-        # calculate value
-        f = {'flatFee': data['flat_fee'],
-             'pctFee': data['pct_fee']} 
+            # calculate value
+            f = {'flatFee': data['flat_fee'],
+                 'pctFee': data['pct_fee']} 
 
-        c = Contract()
-        send_amount, total_fee = c.pricing(data['channel'], coin, amount, f)
+            c = Contract()
+            send_amount, total_fee = c.pricing(data['channel'], coin, amount, f)
 
-        ts = int(time.time())
+            ts = int(time.time())
     
-        c.create(ts, send, send_amount, receive, amount, total_fee)
-        new_contract = (c.contract,)
-        acesdb.storeContracts(new_contract)
+            c.create(ts, send, send_amount, receive, amount, total_fee)
+            new_contract = (c.contract,)
+            acesdb.storeContracts(new_contract)
+            
+            address = data['service_acct'] 
+            amt = send_amount / atomic
+            vendorfield = c.uid
 
-        address = data['service_acct'] 
-        amt = send_amount / atomic
-        vendorfield = c.uid
+            qr_dict={"success":True,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
+            #return json to client (address, amount, vendorfield)
+            return jsonify(qr_dict)
 
-        qr_dict={"success":True,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
-        #return json to client (address, amount, vendorfield)
-        return jsonify(qr_dict)
-
-    else:
-        if c1:
-            msg = c2_msg
         else:
-            msg = c1_msg
+            if c1:
+                msg = c2_msg
+            else:
+                msg = c1_msg
 
         return jsonify(msg)
+    
+    except:
+        error ={"success":False, "msg":"Incorrect Entry"}
+        return jsonify(Error=error)
+
 
 
 #display all prices
@@ -115,27 +121,28 @@ def contracts():
 @app.route("/capacity")
 def capacity():
 
-    service_availability = {}
-    contracts = acesdb.unprocessedContracts().fetchall()
-    for key in coin:
-        pythaces = Pythaces(fx_coins[key], atomic)
-        # total capacity
-        capacity = pythaces.service_capacity(coin[key]['service_acct'])
-        # reserve capacity
-        reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
-        #available capacity
-        available = pythaces.available_capacity()
+    try:
+        service_availability = {}
+        contracts = acesdb.unprocessedContracts().fetchall()
+    
+        for key in coin:
+            pythaces = Pythaces(fx_coins[key], atomic)
+            # total capacity
+            capacity = pythaces.service_capacity(coin[key]['service_acct'])
+            # reserve capacity
+            reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
+            #available capacity
+            available = pythaces.available_capacity()
         
-        service_availability[key] = {"totalCapacity": capacity,
+            service_availability[key] = {"totalCapacity": capacity,
                                     "reservedCapacity": reserved,
                                     "availableCapacity": available}
         
-    return jsonify(service_availability)
-    '''
+        return jsonify(service_availability)
+    
     except:
         error ={"success":False, "msg":"Capacity is not available"}
         return jsonify(Error=error)
-    '''
 
 def validate_amount(c,amount):
     
