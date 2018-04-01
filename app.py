@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, json, request, render_template, make_response
+from flask import Flask, jsonify, json, request, render_template
 from flask_cors import CORS
 from core.acedb import AceDB
 from core.pythaces import Pythaces
@@ -17,7 +17,7 @@ CORS(app)
 @app.route("/")
 #main landing page
 def home():
-    return render_templates("index.html")
+    return render_template("index.html")
 
 @app.route("/<coin>", methods=['POST'])
 def crypto(coin):
