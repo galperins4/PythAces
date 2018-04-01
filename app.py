@@ -17,7 +17,7 @@ CORS(app)
 @app.route("/")
 #main landing page
 def home():
-    pass
+    return render_templates("index.html")
 
 @app.route("/<coin>", methods=['POST'])
 def crypto(coin):
