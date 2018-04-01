@@ -14,12 +14,13 @@ atomic = 100000000
 app = Flask(__name__)
 CORS(app)
 
+'''
 @app.route("/")
 #main landing page
 def home():
     return redirect("http://"+data['channel_ip'])
-
-@app.route("/<coin>", methods=['POST'])
+'''
+@app.route("/api/<coin>", methods=['POST'])
 def crypto(coin):
     try:
         # get send/receive addresses and amouunt
@@ -71,7 +72,7 @@ def crypto(coin):
 
 
 #display all prices
-@app.route("/prices")
+@app.route("/api/prices")
 def prices():
     
     try:
@@ -98,7 +99,7 @@ def prices():
         return jsonify(Error=error)
 
 #Change this to just send contracts
-@app.route('/contracts') 
+@app.route('/api/contracts') 
 def contracts():
     filtered_contracts=[]
     all_contracts = acesdb.contracts().fetchall()
@@ -118,7 +119,7 @@ def contracts():
     return jsonify(filtered_contracts)
 
 #get all capacity
-@app.route("/capacity")
+@app.route("/api/capacity")
 def capacity():
 
     try:
@@ -147,7 +148,7 @@ def capacity():
 def validate_amount(c,amount):
     
     # check against limit 
-    url = "http://"+data['channel_ip']+":5000/capacity"
+    url = "http://"+data['channel_ip']+":5000/api/capacity"
     r = requests.get(url)
     avail_cap = r.json()[c]["availableCapacity"] - atomic
 
