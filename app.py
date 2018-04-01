@@ -17,7 +17,7 @@ CORS(app)
 @app.route("/")
 #main landing page
 def home():
-    return redirect(data['channel_ip'])
+    return redirect("http://"+data['channel_ip'])
 
 @app.route("/<coin>", methods=['POST'])
 def crypto(coin):
