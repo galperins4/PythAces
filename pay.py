@@ -184,14 +184,13 @@ if __name__ == '__main__':
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
                         tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
-                        record = [tx['recipientId'],tx['amount'],tx['id']]
+                        record = [i[4],tx['recipientId'],tx['amount'],tx['id']]
                         signed_tx.append(tx)
                         transaction = park.transport().createBatchTransaction(signed_tx)
-                        #record = [i[4],i[2],i[3], transaction['transactionIds'][0]]
                     
                         #assuming transaction is good, update staged record for this contract
                         acedb.processStagedPayment(i[1])
-                        #acedb.storeTransactions(record)
+                        acedb.storeTransactions(record)
                     except:
                         print("Error Sending Transaction, Try again!")
 
