@@ -89,13 +89,14 @@ def address(addr):
     #if true this is non-ark dpos
     if addr_check:
         test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
+        # Hard coded for testnet currently
         test += '-t'
         n = test
     else:
         for k,v in coin.items():
         if v.get("addr_start") == addr[0]:
             n = k 
-    
+    return n
 '''
 def broadcast(tx, p, park, r):
     records = []
