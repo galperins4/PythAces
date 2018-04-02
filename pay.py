@@ -85,8 +85,15 @@ def net_filter(p):
     return final
 '''
 def address(addr):
-    for k,v in coin.items():
-       if v.get("addr_start") == l:
+    addr_check = addr[0].isdigit()
+    #if true this is non-ark dpos
+    if addr_check:
+        test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
+        test += '-t'
+        n = test
+    else:
+        for k,v in coin.items():
+        if v.get("addr_start") == l:
            return k
     
 '''
