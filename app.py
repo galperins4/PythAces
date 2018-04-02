@@ -120,6 +120,8 @@ def get_contract(id):
     new_id = ""
     for i in id:
         new_id+=i
+        
+    print(type(new_id))
     contract_id = acesdb.singleContract(new_id).fetchall()
     jsoned = contract_to_json(contract_id)
     return jsonify(jsoned)
