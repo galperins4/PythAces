@@ -117,9 +117,10 @@ def contracts():
 
 @app.route('/api/contracts/<id>')
 def get_contract(id):
+    new_id = ""
     for i in id:
-        print(i)
-    contract_id = acesdb.singleContract(id).fetchall()
+        new_id+=i
+    contract_id = acesdb.singleContract(new_id).fetchall()
     jsoned = contract_to_json(contract_id)
     return jsonify(jsoned)
     
