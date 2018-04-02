@@ -158,25 +158,23 @@ if __name__ == '__main__':
     
     while True:
         
-        # check for unprocessed payments
-        if data['channel'] in lisk_fork.keys():
-            pass
-            #unprocessed_pay = acedb.stagedLiskPayment().fetchall()
-        else:
-            unprocessed_pay = acedb.stagedArkPayment().fetchall()
+        # check for unprocessed payments 
+        unprocessed_pay = acedb.stagedArkPayment().fetchall()
 
         # query not empty means unprocessed blocks
         if unprocessed_pay:
             
             for i in unprocessed_pay:
+                n_letter = i[2][0]
+                net = letter(n_letter)
+                
                 if data['channel'] in lisk_fork.keys():
                     pass
                     #tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
                     # get first letter of send to address to find network
                     signed_tx=[]
-                    n_letter = i[2][0]
-                    net = letter(n_letter)
+                    
                     #instantiate park object
                     park = fx_coins[net]                    
                     # get passphrases
