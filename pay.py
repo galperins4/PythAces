@@ -90,7 +90,7 @@ def address(addr):
     if addr_check:
         test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
         # Hard coded for testnet currently
-        test += '-t'
+        if len(test ) += '-t'
         n = test
     else:
         for k,v in coin.items():
