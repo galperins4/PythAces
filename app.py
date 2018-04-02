@@ -104,7 +104,7 @@ def contract_to_json(c):
     return convert
 
 #Change this to just send contracts
-@app.route('/api/contracts') 
+@app.route("/api/contracts") 
 def contracts():
     filtered_contracts=[]
     all_contracts = acesdb.contracts().fetchall()
@@ -115,7 +115,7 @@ def contracts():
 
     return jsonify(filtered_contracts)
 
-@app.route('/api/contracts/<id>')
+@app.route("/api/contracts/<id>")
 def get_contract(id):
     contract_id = acesdb.singleContract(id).fetchall()
     jsoned = contract_to_json(contract_id)
