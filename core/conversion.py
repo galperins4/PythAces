@@ -27,7 +27,7 @@ class Conversion:
                    'dark': 'ark',
                    'persona-t': 'kapu',
                    'lwf-t': 'xrp',
-                   'shift-t: 'shift'}
+                   'shift-t': 'shift'}
         
         if a in test.keys():
             return test[a].upper()
