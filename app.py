@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, redirect
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 from core.acedb import AceDB
 from core.pythaces import Pythaces
@@ -14,12 +14,6 @@ atomic = 100000000
 app = Flask(__name__)
 CORS(app)
 
-'''
-@app.route("/")
-#main landing page
-def home():
-    return redirect("http://"+data['channel_ip'])
-'''
 @app.route("/api/<coin>", methods=['POST'])
 def crypto(coin):
     try:
@@ -69,8 +63,6 @@ def crypto(coin):
         error ={"success":False, "msg":"Incorrect Entry"}
         return jsonify(Error=error)
 
-
-
 #display all prices
 @app.route("/api/prices")
 def prices():
@@ -98,6 +90,19 @@ def prices():
         error ={"success":False, "msg":"Prices not available"}
         return jsonify(Error=error)
 
+def contract_to_json(c):
+    convert={"contract":c[0],
+         "createdOnTimestamp":c[1],
+         "sendingAddress":c[2],
+         "sendingAmount":c[3]/atomic,
+         "receivingAddress":c[4],
+         "receivingAmount":c[5]/atomic,
+         "totalFees":c[6]/atomic,
+         "contractStatus":c[7],
+         "processedOnTimestamp":c[8]}
+    
+    return convert
+
 #Change this to just send contracts
 @app.route('/api/contracts') 
 def contracts():
@@ -105,19 +110,17 @@ def contracts():
     all_contracts = acesdb.contracts().fetchall()
     for i in all_contracts:
         if i[7] != "Expired":
-            tmp={"contract":i[0],
-                 "createdOnTimestamp":i[1],
-                 "sendingAddress":i[2],
-                 "sendingAmount":i[3]/atomic,
-                 "receivingAddress":i[4],
-                 "receivingAmount":i[5]/atomic,
-                 "totalFees":i[6]/atomic,
-                 "contractStatus":i[7],
-                 "processedOnTimestamp":i[8]}
-            filtered_contracts.append(tmp)
+            filter_tmp = contract_to_json(i)
+            filtered_contracts.append(filter_tmp)
 
     return jsonify(filtered_contracts)
 
+@app.route('/api/contracts/<id>')
+def get_contract(id):
+    contract_id = acesdb.singleContract(id).fetchall()
+    jsoned = contract_to_json(contract_id)
+    return jsonify(jsoned)
+    
 #get all capacity
 @app.route("/api/capacity")
 def capacity():
@@ -148,7 +151,7 @@ def capacity():
 def validate_amount(c,amount):
     
     # check against limit 
-    url = "http://"+data['channel_ip']+":5000/api/capacity"
+    url = "http://"+data['channel_ip']+"/api/capacity"
     r = requests.get(url)
     avail_cap = r.json()[c]["availableCapacity"] - atomic
 
@@ -208,4 +211,4 @@ if __name__ == "__main__":
     for key in coin:
         fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
       
-    app.run(host=data['channel_ip'], threaded=True)
+    app.run(threaded=True)

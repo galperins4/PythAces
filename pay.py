@@ -157,9 +157,6 @@ if __name__ == '__main__':
         netname = lisk_fork[B['network']]
     '''
     while True:
-        # get peers
-        #signed_tx = []
-        #unique_contracts = []
         
         # check for unprocessed payments
         if data['channel'] in lisk_fork.keys():
@@ -187,6 +184,8 @@ if __name__ == '__main__':
                     try:
                         transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
                         print(transaction)
+                        record = [i[4],i[2],i[3], transaction['result']]
+                        print(record)
                     
                         #assuming transaction is good, update staged record for this contract
                         acedb.processStagedPayment(i[1])
