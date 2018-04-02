@@ -187,13 +187,19 @@ def validate_addresses(c, a_addr, b_addr):
     # set response to invalid
     flag = False
     msg = {"success":flag, "msg":"one or both addresses invalid, please double check"}
-
-    # check that address is valid address length and network
-    all_check= all([a_len==34,a_addr[0]==a_check,b_len==34,b_addr[0]==b_check])
-    if all_check:
-    # both addresses are good, flip flag and message
+    
+    # ark check
+    if a_addr[0].isdigit() or b_addr[0].isdigit():
+        # temp disable checks for non ark dpos coins
         flag = True
         msg = {"success": flag}
+    else:
+        # check that address is valid address length and network
+        all_check= all([a_len==34,a_addr[0]==a_check,b_len==34,b_addr[0]==b_check])
+        if all_check:
+        # both addresses are good, flip flag and message
+            flag = True
+            msg = {"success": flag}
 
     return flag, msg
 
