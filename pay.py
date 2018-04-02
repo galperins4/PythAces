@@ -2,7 +2,7 @@
 #!/usr/bin/env python
 from core.acedb import AceDB
 from park.park import Park
-# from liskbuilder.transaction import TransactionBuilder
+from liskbuilder.transaction import TransactionBuilder
 # import random
 import time
 import json
@@ -152,10 +152,10 @@ if __name__ == '__main__':
     for key in coin:
         fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
     
-    '''
-    if B['network'] in lisk_fork.keys():
+    
+    if data['channel'] in lisk_fork.keys():
         netname = lisk_fork[B['network']]
-    '''
+    
     while True:
         
         # check for unprocessed payments
