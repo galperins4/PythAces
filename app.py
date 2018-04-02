@@ -115,7 +115,7 @@ def contracts():
 
     return jsonify(filtered_contracts)
 
-@app.route("/api/contracts/<id>")
+@app.route("/api/history/<id>")
 def get_contract(id):
     #contract_id = acesdb.singleContract(id).fetchall()
     all_contracts = acesdb.contracts().fetchall()
