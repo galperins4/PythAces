@@ -26,7 +26,8 @@ class Conversion:
         test = {'dkapu': 'kapu', 
                    'dark': 'ark',
                    'persona-t': 'kapu',
-                   'lwf-t': 'xrp'}
+                   'lwf-t': 'xrp',
+                   'shift-t: 'shift'}
         
         if a in test.keys():
             return test[a].upper()
