@@ -84,7 +84,7 @@ def net_filter(p):
         
     return final
 '''
-def letter(l):
+def address(addr):
     for k,v in coin.items():
        if v.get("addr_start") == l:
            return k
@@ -162,8 +162,8 @@ if __name__ == '__main__':
             for i in unprocessed_pay:
                 signed_tx=[]
                 # get first letter and find network
-                n_letter = i[2][0]
-                net = letter(n_letter)
+                #n_letter = i[2][0]
+                net = address(i[2])
                 #instantiate park object 
                 park = fx_coins[net]                    
                 # get passphrases
