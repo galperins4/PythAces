@@ -113,8 +113,8 @@ class AceDB:
     def contracts(self):
         return self.cursor.execute("SELECT * FROM contracts")
     
-    def singleContract(self, contract_id):
-        return self.cursor.execute("SELECT * FROM contracts WHERE contract = {contract_id}")
+    def singleContract(self, contract):
+        return self.cursor.execute("SELECT * FROM contracts WHERE contract = '{contract}'")
     
     def transactions(self):
         return self.cursor.execute("SELECT * FROM transactions")
