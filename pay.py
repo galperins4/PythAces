@@ -184,7 +184,7 @@ if __name__ == '__main__':
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
                         tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
-                        record = [i[4],tx['recipientId'],tx['amount'],tx['id']]
+                        record = [[i[4],tx['recipientId'],tx['amount'],tx['id']]]
                         signed_tx.append(tx)
                         transaction = park.transport().createBatchTransaction(signed_tx)
                     
