@@ -90,7 +90,7 @@ def address(addr):
     if addr_check:
         test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
         # Hard coded for testnet currently
-        
+        # Shift check
         if len(test)==1 and test[0]=='s':
             test += 'hift-t
         else:
