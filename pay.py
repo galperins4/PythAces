@@ -184,11 +184,9 @@ if __name__ == '__main__':
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
                         tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
-                        print(tx)
+                        record = [tx['recipientId'],tx['amount'],tx['id']]
                         signed_tx.append(tx)
                         transaction = park.transport().createBatchTransaction(signed_tx)
-                        #transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
-                        #print(transaction['transactionIds'][0])
                         #record = [i[4],i[2],i[3], transaction['transactionIds'][0]]
                     
                         #assuming transaction is good, update staged record for this contract
