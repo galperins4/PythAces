@@ -165,20 +165,20 @@ if __name__ == '__main__':
         if unprocessed_pay:
             
             for i in unprocessed_pay:
+                signed_tx=[]
+                # get first letter and find network
                 n_letter = i[2][0]
                 net = letter(n_letter)
+                #instantiate park object
+                park = fx_coins[net]                    
+                # get passphrases
+                pp, sp = get_passphrases(net)
                 
-                if data['channel'] in lisk_fork.keys():
-                    pass
+                if net in lisk_fork.keys():
+                    netname = lisk_fork[net]
                     #tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
-                    # get first letter of send to address to find network
-                    signed_tx=[]
                     
-                    #instantiate park object
-                    park = fx_coins[net]                    
-                    # get passphrases
-                    pp, sp = get_passphrases(net)
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
                         tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
