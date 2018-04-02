@@ -174,6 +174,7 @@ if __name__ == '__main__':
                     #tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
                 else:
                     # get first letter of send to address to find network
+                    signed_tx=[]
                     n_letter = i[2][0]
                     net = letter(n_letter)
                     #instantiate park object
@@ -182,9 +183,11 @@ if __name__ == '__main__':
                     pp, sp = get_passphrases(net)
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
-                        signed_tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
-                        print(signed_tx)
-                        transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
+                        tx = park.transactionBuilder().create(i[2], str(i[3]), i[4], pp, sp)
+                        print(tx)
+                        signed_tx.append(tx)
+                        transaction = park.transport().createBatchTransaction(signed_tx)
+                        #transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
                         #print(transaction['transactionIds'][0])
                         #record = [i[4],i[2],i[3], transaction['transactionIds'][0]]
                     
