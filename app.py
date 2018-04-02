@@ -117,7 +117,7 @@ def contracts():
 
 @app.route('/api/contracts/<id>')
 def get_contract(id):
-    print(id)
+    id = str(id)
     print(type(id))
     contract_id = acesdb.singleContract(id).fetchall()
     jsoned = contract_to_json(contract_id)
