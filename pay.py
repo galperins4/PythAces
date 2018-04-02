@@ -152,31 +152,37 @@ if __name__ == '__main__':
     for key in coin:
         fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
     
-    
-    if data['channel'] in lisk_fork.keys():
-        netname = lisk_fork[B['network']]
-    
     while True:
         
         # check for unprocessed payments 
         unprocessed_pay = acedb.stagedArkPayment().fetchall()
 
         # query not empty means unprocessed blocks
-        if unprocessed_pay:
-            
+        if unprocessed_pay:            
             for i in unprocessed_pay:
                 signed_tx=[]
                 # get first letter and find network
                 n_letter = i[2][0]
                 net = letter(n_letter)
-                #instantiate park object
+                #instantiate park object 
                 park = fx_coins[net]                    
                 # get passphrases
                 pp, sp = get_passphrases(net)
                 
                 if net in lisk_fork.keys():
                     netname = lisk_fork[net]
-                    #tx = TransactionBuilder().create(netname, i[2], i[3], passphrase, secondphrase)
+                    try:
+                        tx = TransactionBuilder().create(netname, i[2], i[3], pp, sp)
+                        record = [[i[4],tx['recipientId'],tx['amount'],tx['id']]]
+                        signed_tx.append(tx)
+                        transaction = park.transport().createBatchTransaction(signed_tx)
+                    
+                        #assuming transaction is good, update staged record for this contract
+                        acedb.processStagedPayment(i[1])
+                        acedb.storeTransactions(record)
+                    except:
+                         print("Error Sending Transaction, Try again!")
+      
                 else:
                     
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
@@ -192,7 +198,7 @@ if __name__ == '__main__':
                     except:
                         print("Error Sending Transaction, Try again!")
 
-            # payment run complete
+            # payment run complete 
             print('Payment Run Completed!')
             #sleep 5 minutes between 50tx blasts
             time.sleep(60)
