@@ -25,7 +25,8 @@ class Conversion:
         # Convert for coins that don't have exchanges for testing
         test = {'dkapu': 'kapu', 
                    'dark': 'ark',
-                   'persona-t': 'kapu'}
+                   'persona-t': 'kapu',
+                   'lwf-t', 'xrp'}
         
         if a in test.keys():
             return test[a].upper()
