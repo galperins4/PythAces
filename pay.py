@@ -92,7 +92,7 @@ def address(addr):
         # Hard coded for testnet currently
         # Shift check
         if len(test)==1 and test[0]=='s':
-            test += 'hift-t
+            test += 'hift-t'
         else:
             test +='-t'
         n = test
