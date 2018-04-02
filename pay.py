@@ -93,8 +93,8 @@ def address(addr):
         n = test
     else:
         for k,v in coin.items():
-        if v.get("addr_start") == l:
-           return k
+        if v.get("addr_start") == addr[0]:
+            n = k 
     
 '''
 def broadcast(tx, p, park, r):
