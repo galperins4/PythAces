@@ -183,12 +183,11 @@ if __name__ == '__main__':
                     #send transaction - TO DO - NEED TO ADD PEER CAPABILITIES
                     try:
                         transaction = park.transactions().create(i[2], str(i[3]), i[4], pp, sp)
-                        print(transaction)
-                        record = [i[4],i[2],i[3], transaction['result']]
-                        print(record)
+                        record = [i[4],i[2],i[3], transaction['transactionIds'][0]]
                     
                         #assuming transaction is good, update staged record for this contract
                         acedb.processStagedPayment(i[1])
+                        acedb.storeTransactions(record)
                     except:
                         print("Error Sending Transaction, Try again!")
 
