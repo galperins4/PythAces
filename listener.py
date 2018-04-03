@@ -58,6 +58,8 @@ if __name__ == '__main__':
             expire = int(time.time())
             if  data['channel'] in ark_fork:
                 transactions = db.listen_transactions(start_row)
+            else:
+                transactions = db.listen_transactions_lisk(start_row)
             tx_cnt =  len(transactions)
             
             for c in unprocessed:
