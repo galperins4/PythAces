@@ -25,7 +25,8 @@ class DB:
             return self.cursor.fetchall()
         except Exception as e:
             print(e)	
-	
+
+    def listen_transactions_lisk(self,row):
 	
 	def listen_transactions_lisk(self, row):
         try:
