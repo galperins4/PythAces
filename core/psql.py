@@ -26,6 +26,7 @@ class DB:
         except Exception as e:
             print(e)	
 	
+	
 	def listen_transactions_lisk(self, row):
         try:
             self.cursor.execute(f"""SELECT "id","senderId", "recipientId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "rowId" > {row} ORDER BY "rowId" DESC""")
