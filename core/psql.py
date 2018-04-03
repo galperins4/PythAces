@@ -26,16 +26,16 @@ class DB:
         except Exception as e:
             print(e)	
 	
-	def listen_transactions(self, row):
+	def listen_transactions_lisk(self, row):
         try:
             self.cursor.execute(f"""SELECT "id","senderId", "recipientId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "rowId" > {row} ORDER BY "rowId" DESC""")
             return self.cursor.fetchall()
         except Exception as e:
             print(e)	    
 	    
-    def last_transaction(self):
+    def last_transaction_lisk(self):
         try:
-            self.cursor.execute(f"""SELECT "rowId" FROM transactions ORDER BY "rowId" DESC LIMIT 1""")
+            self.cursor.execute(f"""SELECT "rowId" FROM trs ORDER BY "rowId" DESC LIMIT 1""")
             return self.cursor.fetchall()
         except Exception as e:
             print(e)	
