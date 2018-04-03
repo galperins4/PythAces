@@ -1,6 +1,6 @@
 {
   "dependencies": {
-        "ark-js": "git://github.com/ArkEcosystem/ark-js.git",
+	"arkjs": "=0.2.1",
 	"lwf-nano-js": "git://github.com/lwfcoin/lwf-nano-js.git",
 	"oxy-js": "git://github.com/Oxycoin/oxy-nano-js.git",
 	"shift-js": "git://github.com/ShiftNrg/shift-js.git",
