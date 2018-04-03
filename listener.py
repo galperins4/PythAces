@@ -18,6 +18,7 @@ def get_dbname():
 
 if __name__ == '__main__':
     
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     # get config data
     data, network, coin = parse_config()
 
@@ -65,12 +66,20 @@ if __name__ == '__main__':
                     for tx in transactions:
                         #note t[0] is tx
                         #check if contract matches vendor field
-                        if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
-                            #we have a match - mark as processed and move to staging
-                            #store payment and mark as processed
-                            msg = "Pythaces contract-"+c[0]
-                            acesdb.storePayment(c[0], c[4], c[5], msg)
-                            acesdb.markAsProcessed(c[0])
+                        #vendor field dpos
+                        if  data['channel'] in ark_fork:
+                            if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
+                                #we have a match - mark as processed and move to staging
+                                #store payment and mark as processed
+                                msg = "Pythaces contract-"+c[0]
+                                acesdb.storePayment(c[0], c[4], c[5], msg)
+                                acesdb.markAsProcessed(c[0])
+                        #non vendor field dpos 
+                        else: 
+                            if c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
+                                msg = "Pythaces contract-"+c[0]
+                                acesdb.storePayment(c[0], c[4], c[5], msg)
+                                acesdb.markAsProcessed(c[0])
             #increment rows processed
             start_row += tx_cnt
             print("Processed through row:", start_row)
