@@ -59,7 +59,8 @@ def crypto(coin):
 
         return jsonify(msg)
     
-    except:
+    except Exception as e:
+        print(e)
         error ={"success":False, "msg":"Incorrect Entry"}
         return jsonify(Error=error)
 
@@ -86,7 +87,8 @@ def prices():
                 
         return jsonify(priceDict)
     
-    except:
+    except Exception as e:
+        print(e)
         error ={"success":False, "msg":"Prices not available"}
         return jsonify(Error=error)
 
@@ -149,7 +151,8 @@ def capacity():
         
         return jsonify(service_availability)
     
-    except:
+    except Exception as e:
+        print(e)
         error ={"success":False, "msg":"Capacity is not available"}
         return jsonify(Error=error)
 
