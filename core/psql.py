@@ -27,8 +27,6 @@ class DB:
             print(e)	
 
     def listen_transactions_lisk(self,row):
-	
-	def listen_transactions_lisk(self, row):
         try:
             self.cursor.execute(f"""SELECT "id","senderId", "recipientId", "amount", "fee", "vendorField", "timestamp" FROM transactions WHERE "rowId" > {row} ORDER BY "rowId" DESC""")
             return self.cursor.fetchall()
