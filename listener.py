@@ -8,7 +8,6 @@ from pay import parse_config
 atomic = 100000000
  
 def get_dbname():
-    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     if  data['channel'] in ark_fork:
         uname = data['dbusername']
     else:
@@ -40,7 +39,10 @@ if __name__ == '__main__':
         start_row = r_start
     else:
         #no starting transaction processed      
-        sr = db.last_transaction()
+        if  data['channel'] in ark_fork: 
+            sr = db.last_transaction()
+        else:
+            sr = db.last_transaction_lisk()
         start_row = sr[0][0]
         #store starting row
         acesdb.storeRow(start_row)
@@ -54,7 +56,8 @@ if __name__ == '__main__':
         # query not empty means unprocessed contracts
         if unprocessed:
             expire = int(time.time())
-            transactions = db.listen_transactions(start_row)
+            if  data['channel'] in ark_fork:
+                transactions = db.listen_transactions(start_row)
             tx_cnt =  len(transactions)
             
             for c in unprocessed:
