@@ -31,11 +31,11 @@ def crypto(coin):
         if a_check == True:
     
             # calculate value
-            f = {'flatFee': data['flat_fee'],
-                 'pctFee': data['pct_fee']} 
+            f = {'flatFee': coin['channel']['flat_fee'],
+                 'pctFee': coin['channel']['pct_fee']} 
 
             c = Contract()
-            send_amount, total_fee = c.pricing(data['channel'], coin, amount, f)
+            send_amount, total_fee = c.pricing(coin, amount, f)
 
             ts = int(time.time())
     
@@ -43,7 +43,7 @@ def crypto(coin):
             new_contract = (c.contract,)
             acesdb.storeContracts(new_contract)
             
-            address = data['service_acct'] 
+            address = coin['channel']['service_acct'] 
             amt = send_amount / atomic
             vendorfield = c.uid
 
@@ -73,12 +73,12 @@ def prices():
         conversion_rates = {} 
         # get conversion rates
         for key in coin:
-            cnv = Conversion(data['channel'], key)
+            cnv = Conversion(coin['channel']['channel'], key)
             conversion_rates[key] = cnv.conversion_rate()
         # get fees	
         feeDict = {
-                "flatFee": data['flat_fee'],
-                "percentFee": data['pct_fee']*100
+                "flatFee": coin['channel']['flat_fee'],
+                "percentFee": coin['channel']['pct_fee']*100
                 }
                 
         priceDict = {
@@ -159,7 +159,7 @@ def capacity():
 def validate_amount(c,amount):
     
     # check against limit 
-    url = "http://"+data['channel_ip']+"/api/capacity"
+    url = "http://"+coin['channel']['channel_ip']+"/api/capacity"
     r = requests.get(url)
     avail_cap = r.json()[c]["availableCapacity"] - atomic
 
@@ -184,7 +184,7 @@ def validate_addresses(c, a_addr, b_addr):
 
     a_len=len(a_addr)
     b_len=len(b_addr)
-    a_check = data["service_acct"][0]
+    a_check = coin['channel']["service_acct"][0]
     b_check = coin[c]["addr_start"]
 
     # set response to invalid
@@ -208,17 +208,17 @@ def validate_addresses(c, a_addr, b_addr):
 
 if __name__ == "__main__":
     # get config data
-    data, network, coin = parse_config()
+    network, coin = parse_config()
     
     #listener listens from cryptoA
     # check to see if ark.db exists, if not initialize db, etc
     if os.path.exists('aces.db') == False:    
-        acesdb = AceDB(data['dbusername'])
+        acesdb = AceDB(coin['channel']['dbusername'])
         # initalize sqldb object
         acesdb.setup()
     
     # check for new rewards accounts to initialize if any changed
-    acesdb = AceDB(data['dbusername'])
+    acesdb = AceDB(coin['channel']['dbusername'])
     
     #initialize park objects for use
     fx_coins = {}
