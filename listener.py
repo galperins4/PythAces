@@ -73,7 +73,7 @@ if __name__ == '__main__':
                         #check if contract matches vendor field
                         #vendor field dpos
                         if  coin[]['channel'] in ark_fork:
-                            if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
+                            if c[0] == tx[5] and c[2] == tx[1] and coin['channel']["service_acct"] == tx[2] and c[3] == tx[3]:
                                 #we have a match - mark as processed and move to staging
                                 #store payment and mark as processed
                                 msg = "Pythaces contract-"+c[0]
@@ -81,7 +81,7 @@ if __name__ == '__main__':
                                 acesdb.markAsProcessed(c[0])
                         #non vendor field dpos 
                         else: 
-                            if c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
+                            if c[2] == tx[1] and coin['channel']["service_acct"] == tx[2] and c[3] == tx[3]:
                                 msg = "Pythaces contract-"+c[0]
                                 acesdb.storePayment(c[0], c[4], c[5], msg)
                                 acesdb.markAsProcessed(c[0])
