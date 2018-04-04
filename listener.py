@@ -8,8 +8,8 @@ from pay import parse_config
 atomic = 100000000
  
 def get_dbname():
-    if  data['channel'] in ark_fork:
-        uname = data['dbusername']
+    if  coin['channel']['channel'] in ark_fork:
+        uname = coin['channel']['dbusername']
     else:
         uname = network[data['channel']]['db_user']
         
