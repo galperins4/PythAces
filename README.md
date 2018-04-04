@@ -5,6 +5,8 @@
 ```sh
 install and sync relay server
 git clone https://github.com/galperins4/PythAces 
+cd ~/PythAces/config
+update configs (see below)
 cd ~/PythAces
 bash install_beta.sh
 ```
