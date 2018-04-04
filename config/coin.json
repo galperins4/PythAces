@@ -1,4 +1,16 @@
 {
+  "channel": { 
+      "dark",
+  "channel_ip": "xx.xx.xx.xx",
+  "service_acct": "addr1",
+  "dbusername": "galp",
+  "flat_fee": 1,
+  "pct_fee": 0.0125,
+  "reach": 5
+  
+  
+  
+  
   "dkapu":{
       "relay_ip": "51.15.67.153",
       "service_acct": "ZUFE6zsBwtwUaH53544sqJSuLga2WqjhZi",
