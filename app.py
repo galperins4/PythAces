@@ -223,7 +223,7 @@ if __name__ == "__main__":
     #initialize park objects for use
     fx_coins = {}
     for key in coin:
-        fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
+        if key != "channel":
+            fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
     
-    #app.run()
     app.run(threaded=True)
