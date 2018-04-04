@@ -9,7 +9,7 @@
 	"interpreter_args": "-u"
     },
     {
-        "name": "pay",
+        "name": "conversion",
         "script": "~/PythAces/pay.py",
         "instances": 1,
         "exec_mode": "fork",
