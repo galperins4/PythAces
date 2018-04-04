@@ -155,12 +155,13 @@ if __name__ == '__main__':
                 'lisk' : 'lisk'}
     
     network, coin = parse_config()
-    acedb = AceDB(coin[['dbusername'])
-    reach = data['reach']
+    acedb = AceDB(coin['channel']['dbusername'])
+    reach = coin['channel']['reach']
     
     fx_coins = {}
     for key in coin:
-        fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
+        if key != "channel":
+            fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
     
     while True:
         
@@ -172,7 +173,6 @@ if __name__ == '__main__':
             for i in unprocessed_pay:
                 signed_tx=[]
                 # get first letter and find network
-                #n_letter = i[2][0]
                 net = address(i[2])
                 #instantiate park object 
                 park = fx_coins[net]                    
