@@ -138,15 +138,16 @@ def capacity():
         contracts = acesdb.unprocessedContracts().fetchall()
     
         for key in coin:
-            pythaces = Pythaces(fx_coins[key], atomic)
-            # total capacity
-            capacity = pythaces.service_capacity(coin[key]['service_acct'])
-            # reserve capacity
-            reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
-            #available capacity
-            available = pythaces.available_capacity()
+            if key != 'channel':
+                pythaces = Pythaces(fx_coins[key], atomic)
+                # total capacity
+                capacity = pythaces.service_capacity(coin[key]['service_acct'])
+                # reserve capacity
+                reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
+                #available capacity
+                available = pythaces.available_capacity()
         
-            service_availability[key] = {"totalCapacity": capacity,
+                service_availability[key] = {"totalCapacity": capacity,
                                     "reservedCapacity": reserved,
                                     "availableCapacity": available}
         
