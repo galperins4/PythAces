@@ -11,7 +11,7 @@ def get_dbname():
     if  coin['channel']['channel'] in ark_fork:
         uname = coin['channel']['dbusername']
     else:
-        uname = network[data['channel']]['db_user']
+        uname = network[coin['channel']['channel']]['db_user']
         
     return uname
 
@@ -19,15 +19,15 @@ if __name__ == '__main__':
     
     ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     # get config data
-    data, network, coin = parse_config()
+    network, coin = parse_config()
 
     # initialize db connection
     #check for special usernames needed for lisk forks
     username = get_dbname()
-    db = DB(network[data['channel']]['db'], username, network[data['channel']]['db_pw'])
+    db = DB(network[coin['channel']['channel']]['db'], username, network[coin['channel']['channel']]['db_pw'])
  
     # connect to contracts database and get last row of tx
-    acesdb = AceDB(data['dbusername'])
+    acesdb = AceDB(coin['channel']['dbusername'])
     
     check_start = acesdb.getRows().fetchall()
     
@@ -39,7 +39,7 @@ if __name__ == '__main__':
         start_row = r_start
     else:
         #no starting transaction processed      
-        if  data['channel'] in ark_fork: 
+        if  coin['channel']['channel'] in ark_fork: 
             sr = db.last_transaction()
         else:
             sr = db.last_transaction_lisk()
@@ -56,7 +56,7 @@ if __name__ == '__main__':
         # query not empty means unprocessed contracts
         if unprocessed:
             expire = int(time.time())
-            if  data['channel'] in ark_fork:
+            if  coin['channel']['channel'] in ark_fork:
                 transactions = db.listen_transactions(start_row)
             else:
                 transactions = db.listen_transactions_lisk(start_row)
@@ -72,7 +72,7 @@ if __name__ == '__main__':
                         #note t[0] is tx
                         #check if contract matches vendor field
                         #vendor field dpos
-                        if  data['channel'] in ark_fork:
+                        if  coin[]['channel'] in ark_fork:
                             if c[0] == tx[5] and c[2] == tx[1] and data["service_acct"] == tx[2] and c[3] == tx[3]:
                                 #we have a match - mark as processed and move to staging
                                 #store payment and mark as processed
