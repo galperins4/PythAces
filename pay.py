@@ -20,8 +20,6 @@ def parse_config():
     """
     Parse the config.json file and return the result.
     """
-    with open('config/config.json') as data_file:
-        data = json.load(data_file)
         
     with open('config/networks.json') as network_file:
         network = json.load(network_file)
@@ -29,7 +27,7 @@ def parse_config():
     with open('config/coin.json') as coin_file:
         coin = json.load(coin_file)
         
-    return data, network, coin
+    return network, coin
 
 def get_passphrases(c):
     # Get the passphrase
@@ -156,8 +154,8 @@ if __name__ == '__main__':
                 'lisk-t': 'lisk',
                 'lisk' : 'lisk'}
     
-    data, network, coin = parse_config()
-    acedb = AceDB(data['dbusername'])
+    network, coin = parse_config()
+    acedb = AceDB(coin[['dbusername'])
     reach = data['reach']
     
     fx_coins = {}
