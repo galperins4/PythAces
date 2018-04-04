@@ -1,5 +1,6 @@
 from pay import parse_config
 from core.acedb import AceDB
+import os.path
 
 if name 
 
