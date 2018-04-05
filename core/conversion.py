@@ -31,5 +31,6 @@ class Conversion:
         
         if a in test.keys():
             return test[a].upper()
+        elif a in 
         else:
             return a.upper()
