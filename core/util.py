@@ -50,3 +50,18 @@ def get_coin(addr):
             if v.get("addr_start") == addr[0]:
                 n = k 
     return n
+
+def is_ark_fork(c):
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
+    if c in ark_fork:
+        return True
+    else:
+        return False
+ 
+def get_dbname():
+    if is_ark_fork(coin['channel']['channel']):
+        uname = coin['channel']['dbusername']
+    else:
+        uname = network[coin['channel']['channel']]['db_user']
+        
+    return uname
