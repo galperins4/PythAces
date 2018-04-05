@@ -46,8 +46,9 @@ def crypto(convCoin):
             address = coin['channel']['service_acct'] 
             amt = send_amount / atomic
             vendorfield = c.uid
+            channel = coin['channel']['channel']
 
-            qr_dict={"success":True,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
+            qr_dict={"success":True,"channel":channel,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
             #return json to client (address, amount, vendorfield)
             return jsonify(qr_dict)
 
