@@ -125,11 +125,11 @@ if __name__ == '__main__':
             for i in unprocessed_pay:
                 signed_tx=[]
                 # get first letter and find network
-                net = get_coin(i[2])
+                net = get_coin(i[2], coin)
                 #instantiate park object 
                 park = fx_coins[net]                    
                 # get passphrases
-                pp, sp = get_passphrases(net)
+                pp, sp = get_passphrases(net, coin)
                 
                 if net in lisk_fork.keys():
                     netname = lisk_fork[net]
