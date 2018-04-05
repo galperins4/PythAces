@@ -15,7 +15,7 @@ def is_ark_fork(c):
         return False
  
 def get_dbname():
-    if  is_ark_fork(coin['channel']['channel']):
+    if is_ark_fork(coin['channel']['channel']):
         uname = coin['channel']['dbusername']
     else:
         uname = network[coin['channel']['channel']]['db_user']
