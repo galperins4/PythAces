@@ -6,6 +6,13 @@ import time
 from pay import parse_config
 
 atomic = 100000000
+
+def is_ark_fork(c):
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
+    if c in ark_fork:
+        return True
+    else:
+        return False
  
 def get_dbname():
     if  coin['channel']['channel'] in ark_fork:
@@ -17,7 +24,7 @@ def get_dbname():
 
 if __name__ == '__main__':
     
-    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
+    #ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
     # get config data
     network, coin = parse_config()
 
@@ -39,7 +46,7 @@ if __name__ == '__main__':
         start_row = r_start
     else:
         #no starting transaction processed      
-        if  coin['channel']['channel'] in ark_fork: 
+        if  is_ark_fork(coin['channel']['channel']): 
             sr = db.last_transaction()
         else:
             sr = db.last_transaction_lisk()
@@ -56,7 +63,7 @@ if __name__ == '__main__':
         # query not empty means unprocessed contracts
         if unprocessed:
             expire = int(time.time())
-            if  coin['channel']['channel'] in ark_fork:
+            if is_ark_fork(coin['channel']['channel']):
                 transactions = db.listen_transactions(start_row)
             else:
                 transactions = db.listen_transactions_lisk(start_row)
@@ -72,7 +79,7 @@ if __name__ == '__main__':
                         #note t[0] is tx
                         #check if contract matches vendor field
                         #vendor field dpos
-                        if  coin['channel']['channel'] in ark_fork:
+                        if  is_ark_fork(coin['channel']['channel']):
                             if c[0] == tx[5] and c[2] == tx[1] and coin['channel']["service_acct"] == tx[2] and c[3] == tx[3]:
                                 #we have a match - mark as processed and move to staging
                                 #store payment and mark as processed
