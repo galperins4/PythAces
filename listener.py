@@ -15,7 +15,7 @@ if __name__ == '__main__':
 
     # initialize db connection
     #check for special usernames needed for lisk forks
-    username = get_dbname()
+    username = get_dbname(coin)
     db = DB(network[coin['channel']['channel']]['db'], username, network[coin['channel']['channel']]['db_pw'])
  
     # connect to contracts database and get last row of tx
