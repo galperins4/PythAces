@@ -33,7 +33,7 @@ def get_passphrases(c):
 
     return passphrase, secondphrase
 
-def address(addr):
+def get_coin(addr):
     addr_check = addr[0].isdigit()
     #if true this is non-ark dpos
     if addr_check:
