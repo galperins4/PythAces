@@ -14,8 +14,8 @@ atomic = 100000000
 app = Flask(__name__)
 CORS(app)
 
-@app.route("/api/<coin>", methods=['POST'])
-def crypto(coin):
+@app.route("/api/<convCoin>", methods=['POST'])
+def crypto(convCoin):
     try:
         # get send/receive addresses and amouunt
         req_data = request.get_json()
@@ -23,8 +23,8 @@ def crypto(coin):
         receive = req_data["receive"]
         amount = req_data["amount"]*atomic
         # do validations
-        c1, c1_msg = validate_addresses(coin,send,receive)
-        c2, c2_msg = validate_amount(coin,amount)
+        c1, c1_msg = validate_addresses(convCoin,send,receive)
+        c2, c2_msg = validate_amount(convCoin,amount)
 
         a_check = all([c1, c2])
 
@@ -35,7 +35,7 @@ def crypto(coin):
                  'pctFee': coin['channel']['pct_fee']} 
 
             c = Contract()
-            send_amount, total_fee = c.pricing(coin, amount, f)
+            send_amount, total_fee = c.pricing(coin['channel'],convCoin, amount, f)
 
             ts = int(time.time())
     
