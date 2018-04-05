@@ -22,7 +22,7 @@ def parse_config():
         
     return network, coin
 
-def get_passphrases(c):
+def get_passphrases(c, coin):
     # Get the passphrase
     passphrase = coin[c]['service_account_passphrase']
     
@@ -33,7 +33,7 @@ def get_passphrases(c):
 
     return passphrase, secondphrase
 
-def get_coin(addr):
+def get_coin(addr, coin):
     addr_check = addr[0].isdigit()
     #if true this is non-ark dpos
     if addr_check:
@@ -58,7 +58,7 @@ def is_ark_fork(c):
     else:
         return False
  
-def get_dbname():
+def get_dbname(coin):
     if is_ark_fork(coin['channel']['channel']):
         uname = coin['channel']['dbusername']
     else:
