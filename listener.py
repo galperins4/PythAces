@@ -7,21 +7,6 @@ from core.util import parse_config, is_ark_fork, get_dbname
 
 atomic = 100000000
 
-def is_ark_fork(c):
-    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
-    if c in ark_fork:
-        return True
-    else:
-        return False
- 
-def get_dbname():
-    if is_ark_fork(coin['channel']['channel']):
-        uname = coin['channel']['dbusername']
-    else:
-        uname = network[coin['channel']['channel']]['db_user']
-        
-    return uname
-
 if __name__ == '__main__':
     
     #ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t']
