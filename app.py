@@ -4,7 +4,7 @@ from core.acedb import AceDB
 from core.pythaces import Pythaces
 from core.contracts import Contract
 from core.conversion import Conversion
-from pay import parse_config, get_network
+from core.util import parse_config, get_network
 import requests 
 import time
 import os.path
