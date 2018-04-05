@@ -5,7 +5,7 @@ from core.pythaces import Pythaces
 from core.contracts import Contract
 from core.conversion import Conversion
 from pay import parse_config, get_network
-import requests
+import requests 
 import time
 import os.path
 
@@ -211,14 +211,14 @@ def validate_addresses(c, a_addr, b_addr):
 if __name__ == "__main__":
     # get config data
     network, coin = parse_config()
-    
+    '''
     #listener listens from cryptoA
     # check to see if ark.db exists, if not initialize db, etc
     if os.path.exists('aces.db') == False:    
         acesdb = AceDB(coin['channel']['dbusername'])
         # initalize sqldb object
         acesdb.setup()
-    
+    '''
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(coin['channel']['dbusername'])
     
