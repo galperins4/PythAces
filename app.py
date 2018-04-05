@@ -35,7 +35,7 @@ def crypto(convCoin):
                  'pctFee': coin['channel']['pct_fee']} 
 
             c = Contract()
-            send_amount, total_fee = c.pricing(coin['channel'],convCoin, amount, f)
+            send_amount, total_fee = c.pricing(coin['channel']['channel'],convCoin, amount, f)
 
             ts = int(time.time())
     
