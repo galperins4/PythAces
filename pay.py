@@ -4,7 +4,7 @@ from core.acedb import AceDB
 from park.park import Park
 from liskbuilder.transaction import TransactionBuilder
 # import random
-from core.util import parse_config, get_network, get_passphrases
+from core.util import parse_config, get_network, get_passphrases, get_coin
 import time
 import json
 
@@ -50,23 +50,7 @@ def net_filter(p):
         
     return final
 '''
-def address(addr):
-    addr_check = addr[0].isdigit()
-    #if true this is non-ark dpos
-    if addr_check:
-        test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
-        # Hard coded for testnet currently
-        # Shift check
-        if len(test)==1 and test[0]=='s':
-            test += 'hift-t'
-        else:
-            test +='-t'
-        n = test
-    else:
-        for k,v in coin.items():
-            if v.get("addr_start") == addr[0]:
-                n = k 
-    return n
+
 '''
 def broadcast(tx, p, park, r):
     records = []
@@ -141,7 +125,7 @@ if __name__ == '__main__':
             for i in unprocessed_pay:
                 signed_tx=[]
                 # get first letter and find network
-                net = address(i[2])
+                net = get_coin(i[2])
                 #instantiate park object 
                 park = fx_coins[net]                    
                 # get passphrases
