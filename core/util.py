@@ -32,3 +32,21 @@ def get_passphrases(c):
         secondphrase = None
 
     return passphrase, secondphrase
+
+def address(addr):
+    addr_check = addr[0].isdigit()
+    #if true this is non-ark dpos
+    if addr_check:
+        test = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
+        # Hard coded for testnet currently
+        # Shift check
+        if len(test)==1 and test[0]=='s':
+            test += 'hift-t'
+        else:
+            test +='-t'
+        n = test
+    else:
+        for k,v in coin.items():
+            if v.get("addr_start") == addr[0]:
+                n = k 
+    return n
