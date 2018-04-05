@@ -3,7 +3,7 @@
 from core.psql import DB
 from core.acedb import AceDB
 import time
-from pay import parse_config
+from core.util import parse_config, is_ark_fork, get_dbname
 
 atomic = 100000000
 
