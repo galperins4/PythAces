@@ -98,7 +98,6 @@ def prices():
         return jsonify(Error=error)
 
 def contract_to_json(c):
-    channel = coin['channel']['channel']
     convert={"contract":c[0],
          "createdOnTimestamp":c[1],
          "sendingAddress":c[2],
@@ -108,7 +107,8 @@ def contract_to_json(c):
          "totalFees":c[6]/atomic,
          "contractStatus":c[7],
          "processedOnTimestamp":c[8],
-         "channel": channel}
+         "channel": c[9],
+         "coin": c[10]}
     
     return convert
 
@@ -135,8 +135,6 @@ def get_contract(id):
             contract_id = i
    
     jsoned = contract_to_json(contract_id)
-    channel = coin['channel']['channel']
-    jsoned['channel'] = channel
     return jsonify(jsoned)
     
 #get all capacity
