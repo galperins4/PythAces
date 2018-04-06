@@ -228,5 +228,5 @@ if __name__ == "__main__":
     for key in coin:
         if key != "channel":
             fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
-    
-    app.run(threaded=True)
+    app.run()
+    #app.run(threaded=True)
