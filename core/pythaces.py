@@ -19,11 +19,14 @@ class Pythaces:
         # loop through contracts
         if contracts:
             for i in contracts:
-                # check for starting letter of send to address for network
-                if addr[0].isdigit()i
-                
-                if i[4][0] == letter:
-                    s+=i[5]
+                # look for non ark account
+                if addr[0].isdigit():
+                     a1 = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
+                     
+a2 = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
+                else:    
+                    if i[4][0] == addr[0]:
+                        s+=i[5]
             
         self.reserve_capacity = s
         
