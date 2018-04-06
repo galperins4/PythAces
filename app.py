@@ -188,7 +188,7 @@ def validate_addresses(c, a_addr, b_addr):
     a_len=len(a_addr)
     b_len=len(b_addr)
     a_check = coin['channel']["service_acct"][0]
-    b_check = coin[c]["addr_start"]
+    
 
     # set response to invalid
     flag = False
@@ -197,10 +197,12 @@ def validate_addresses(c, a_addr, b_addr):
     # ark check
     if any([a_addr[0].isdigit(),b_addr[0].isdigit()]):
         # temp disable checks for non ark dpos coins
+        
         flag = True
         msg = {"success": flag}
     else:
         # check that address is valid address length and network
+        b_check = coin[c]["addr_start"]
         all_check= all([a_len==34,a_addr[0]==a_check,b_len==34,b_addr[0]==b_check])
         if all_check:
         # both addresses are good, flip flag and message
