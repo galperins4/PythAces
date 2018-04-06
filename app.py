@@ -16,6 +16,7 @@ CORS(app)
 
 @app.route("/api/<convCoin>", methods=['POST'])
 def crypto(convCoin):
+    acesdb = AceDB(coin['channel']['dbusername'])
     try:
         # get send/receive addresses and amouunt
         req_data = request.get_json()
@@ -110,6 +111,7 @@ def contract_to_json(c):
 #Change this to just send contracts
 @app.route("/api/contracts") 
 def contracts():
+    acesdb = AceDB(coin['channel']['dbusername'])
     filtered_contracts=[]
     all_contracts = acesdb.contracts().fetchall()
     for i in all_contracts:
@@ -121,6 +123,7 @@ def contracts():
 
 @app.route("/api/history/<id>")
 def get_contract(id):
+    acesdb = AceDB(coin['channel']['dbusername'])
     #contract_id = acesdb.singleContract(id).fetchall()
     all_contracts = acesdb.contracts().fetchall()
     for i in all_contracts:
@@ -133,7 +136,7 @@ def get_contract(id):
 #get all capacity
 @app.route("/api/capacity")
 def capacity():
-
+    acesdb = AceDB(coin['channel']['dbusername'])
     try:
         service_availability = {}
         contracts = acesdb.unprocessedContracts().fetchall()
@@ -216,7 +219,7 @@ if __name__ == "__main__":
     network, coin = parse_config()
 
     # check for new rewards accounts to initialize if any changed
-    acesdb = AceDB(coin['channel']['dbusername'])
+    #acesdb = AceDB(coin['channel']['dbusername'])
     
     #initialize park objects for use
     fx_coins = {}
