@@ -37,7 +37,7 @@ class AceDB:
         return self.cursor.fetchall()
 
     def setup(self):
-        self.cursor.execute("CREATE TABLE IF NOT EXISTS contracts (contract varchar(64), timestamp int, s_addr varchar(36), s_amt bigint, r_addr varchar(36), r_amt bigint, c_fee bigint, status varchar(36), processed_at varchar(64) null)")
+        self.cursor.execute("CREATE TABLE IF NOT EXISTS contracts (contract varchar(64), timestamp int, s_addr varchar(36), s_amt bigint, r_addr varchar(36), r_amt bigint, c_fee bigint, status varchar(36), channel varchar(12), coin varchar(12), processed_at varchar(64) null)")
 
         self.cursor.execute("CREATE TABLE IF NOT EXISTS transactions (contract varchar(64), address varchar(36), amount varchar(64), id varchar(64), processed_at varchar(64) )")
         
