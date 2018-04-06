@@ -68,9 +68,9 @@ class AceDB:
             self.cursor.execute("SELECT contract FROM contracts WHERE contract = ?", (c[0],))
 
             if self.cursor.fetchone() is None:
-                newContracts.append((c[0], c[1], c[2], c[3], c[4], c[5], c[6],"Pending Confirmation", None))
+                newContracts.append((c[0], c[1], c[2], c[3], c[4], c[5], c[6],"Pending Confirmation", c[7], c[8],None))
 
-        self.executemany("INSERT INTO contracts VALUES (?,?,?,?,?,?,?,?,?)", newContracts)
+        self.executemany("INSERT INTO contracts VALUES (?,?,?,?,?,?,?,?,?,?,?)", newContracts)
 
         self.commit()
     
