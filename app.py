@@ -144,7 +144,7 @@ def capacity():
                 # total capacity
                 capacity = pythaces.service_capacity(coin[key]['service_acct'])
                 # reserve capacity
-                reserved = pythaces.reserve_capacity(contracts, coin[key]['addr_start'])
+                reserved = pythaces.reserve_capacity(contracts, coin[key]['service_acct'])
                 #available capacity
                 available = pythaces.available_capacity()
         
