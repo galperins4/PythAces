@@ -32,24 +32,24 @@ def crypto(convCoin):
 
         if a_check == True:
     
+            channel = coin['channel']['channel']
             # calculate value
             f = {'flatFee': coin['channel']['flat_fee'],
                  'pctFee': coin['channel']['pct_fee']} 
 
             c = Contract()
-            send_amount, total_fee = c.pricing(coin['channel']['channel'],convCoin, amount, f)
+            send_amount, total_fee = c.pricing(channel,convCoin, amount, f)
 
             ts = int(time.time())
     
-            c.create(ts, send, send_amount, receive, amount, total_fee)
+            c.create(ts, send, send_amount, receive, amount, total_fee, channel, convCoin)
             new_contract = (c.contract,)
             acesdb.storeContracts(new_contract)
             
             address = coin['channel']['service_acct'] 
             amt = send_amount / atomic
             vendorfield = c.uid
-            channel = coin['channel']['channel']
-
+            
             qr_dict={"success":True,"channel":channel,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
             #return json to client (address, amount, vendorfield)
             return jsonify(qr_dict)
