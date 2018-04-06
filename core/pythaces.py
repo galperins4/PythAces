@@ -20,6 +20,8 @@ class Pythaces:
         if contracts:
             for i in contracts:
                 # check for starting letter of send to address for network
+                if addr[0].isdigit()i
+                
                 if i[4][0] == letter:
                     s+=i[5]
             
