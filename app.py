@@ -187,8 +187,6 @@ def validate_addresses(c, a_addr, b_addr):
 
     a_len=len(a_addr)
     b_len=len(b_addr)
-    a_check = coin['channel']["service_acct"][0]
-    
 
     # set response to invalid
     flag = False
@@ -202,7 +200,9 @@ def validate_addresses(c, a_addr, b_addr):
         msg = {"success": flag}
     else:
         # check that address is valid address length and network
+        a_check = coin['channel']["service_acct"][0]
         b_check = coin[c]["addr_start"]
+        
         all_check= all([a_len==34,a_addr[0]==a_check,b_len==34,b_addr[0]==b_check])
         if all_check:
         # both addresses are good, flip flag and message
@@ -214,14 +214,7 @@ def validate_addresses(c, a_addr, b_addr):
 if __name__ == "__main__":
     # get config data
     network, coin = parse_config()
-    '''
-    #listener listens from cryptoA
-    # check to see if ark.db exists, if not initialize db, etc
-    if os.path.exists('aces.db') == False:    
-        acesdb = AceDB(coin['channel']['dbusername'])
-        # initalize sqldb object
-        acesdb.setup()
-    '''
+
     # check for new rewards accounts to initialize if any changed
     acesdb = AceDB(coin['channel']['dbusername'])
     
