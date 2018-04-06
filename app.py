@@ -106,9 +106,9 @@ def contract_to_json(c):
          "receivingAmount":c[5]/atomic,
          "totalFees":c[6]/atomic,
          "contractStatus":c[7],
-         "processedOnTimestamp":c[8],
-         "channel": c[9],
-         "coin": c[10]}
+         "processedOnTimestamp":c[10],
+         "channel": c[8],
+         "coin": c[9]}
     
     return convert
 
