@@ -5,12 +5,16 @@ class Pythaces:
         self.atomic = atomic
         
     def service_capacity(self, address):
-        cap = self.park.accounts().balance(address)
-        self.capacity = int(cap['balance'])
+        try:
+            cap = self.park.accounts().balance(address)
+            self.capacity = int(cap['balance'])
+        except Exception as e:
+            print(e)
+            self.capacity = 0
         
         return self.capacity
     
-    def reserve_capacity(self, contracts, letter):
+    def reserve_capacity(self, contracts, addr):
         s = 0
         # loop through contracts
         if contracts:
