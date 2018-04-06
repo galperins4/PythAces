@@ -11,8 +11,8 @@ class Contract:
         self.uid = str(uuid4())
         self.contract = self.contract + (self.uid,)
         
-    def create(self, ts, saddr, samt, raddr, ramt, fee):
-        self.contract = self.contract + (ts, saddr, samt, raddr, ramt, fee)
+    def create(self, ts, saddr, samt, raddr, ramt, fee, chan, coin):
+        self.contract = self.contract + (ts, saddr, samt, raddr, ramt, fee, chan, coin)
         return self.contract
        
     def pricing(self,a,b,amt,fees):
