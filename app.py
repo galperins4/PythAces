@@ -195,7 +195,7 @@ def validate_addresses(c, a_addr, b_addr):
     msg = {"success":flag, "msg":"one or both addresses invalid, please double check"}
     
     # ark check
-    if a_addr[0].isdigit() or b_addr[0].isdigit():
+    if any([a_addr[0].isdigit(),b_addr[0].isdigit()]):
         # temp disable checks for non ark dpos coins
         flag = True
         msg = {"success": flag}
@@ -228,5 +228,5 @@ if __name__ == "__main__":
     for key in coin:
         if key != "channel":
             fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
-    app.run()
-    #app.run(threaded=True)
+    #app.run()
+    app.run(threaded=True)
