@@ -23,7 +23,8 @@ class Pythaces:
                 if addr[0].isdigit():
                     a1 = addr.translate({ord(ch): None for ch in '0123456789'}).lower()
                     a2 = i[4].translate({ord(ch): None for ch in '0123456789'}).lower()
-                    
+                    if a1==a2:
+                        s+=i[5]
                 else:    
                     if i[4][0] == addr[0]:
                         s+=i[5]
