@@ -84,8 +84,9 @@ def prices():
                 "flatFee": coin['channel']['flat_fee'],
                 "percentFee": coin['channel']['pct_fee']*100
                     }
-                
+        channel = coin['channel']['channel']
         priceDict = {
+                "channel": channel,
                 "prices": conversion_rates,
                 "fees": feeDict}
                 
