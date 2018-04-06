@@ -133,6 +133,8 @@ def get_contract(id):
             contract_id = i
    
     jsoned = contract_to_json(contract_id)
+    channel = coin['channel']['channel']
+    jsoned['channel'] = channel
     return jsonify(jsoned)
     
 #get all capacity
