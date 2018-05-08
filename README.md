@@ -17,7 +17,7 @@ After the repository has been cloned you need to open the `config.json` / `coin.
 
 As the script leverages @FaustBrians ARK python client as well as database retreival and storage classes, python 3.6+ is required. In addition a relay node of the channel coin is required.
 
-## Available Configuration Options (config.json)
+## Available Channel Configuration Options (coin.json)
 - channel: dpos channel for inbound transactions (currently support ark/dark, kapu/dkapu, persona-t)
 - channel_ip: ip address of node
 - service_acct: service account for inbound transactions for the channel 
@@ -26,7 +26,7 @@ _ flat_fee: flat fee per transaction
 - pct_fee: percentage fee per transaction
 - reach: how many peers to broadcast tx to (NOT CURRENTLY IN USE)
 
-## Available Configuration Options (coin.json) - per coin supported 
+## Available Coin Configuration Options (coin.json) - per coin supported 
 - relay_ip: relay to broadcast outbound transactions
 - service_acct: outbound service account 
 - service_account_passphrase: passphrase 
@@ -40,6 +40,7 @@ Note: Pythaces runs on port 5000
 - Additional exception handling and validators
 - Add more dpos coins
 - Add non-DPOS coins 
+- fix address validators
 
 ### v0.0.1
 - Initial release
