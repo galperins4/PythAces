@@ -22,7 +22,7 @@ As the script leverages @FaustBrians ARK python client as well as database retre
 - channel_ip: ip address of node
 - service_acct: service account for inbound transactions for the channel 
 - db_username: os username
-_ flat_fee: flat fee per transaction
+- flat_fee: flat fee per transaction
 - pct_fee: percentage fee per transaction
 - reach: how many peers to broadcast tx to (NOT CURRENTLY IN USE)
 
