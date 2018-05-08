@@ -13,7 +13,7 @@ bash install_beta.sh
 
 ## Configuration & Usage 
 
-After the repository has been cloned you need to open the `config.json` / `coin.json` and change it to your liking. Once this has been done execute the pm2 command `pm2 start apps.json`to start the script. 
+After the repository has been cloned you need to open the `config.json`coin.json` and change it to your liking. Once this has been done execute the pm2 command `pm2 start apps.json`to start the script. 
 
 As the script leverages @FaustBrians ARK python client as well as database retreival and storage classes, python 3.6+ is required. In addition a relay node of the channel coin is required.
 
