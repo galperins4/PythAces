@@ -41,6 +41,7 @@ Note: Pythaces runs on port 5000
 - Add more dpos coins
 - Add non-DPOS coins 
 - fix address validators
+- fix error handling for capacity
 
 ### v0.0.1
 - Initial release
