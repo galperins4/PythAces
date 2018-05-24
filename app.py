@@ -24,8 +24,7 @@ def crypto(convCoin):
         receive = req_data["receive"]
         amount = req_data["amount"]*atomic
         # do validations
-        c1 = True
-        #c1, c1_msg = validate_addresses(convCoin,send,receive)
+        c1, c1_msg = validate_addresses(convCoin,send,receive)
         c2, c2_msg = validate_amount(convCoin,amount)
 
         a_check = all([c1, c2])
