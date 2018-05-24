@@ -18,7 +18,7 @@ class Conversion:
         r = requests.get(url, params=params)
         
         #hard code for persona
-        if self.a == 'PERSONA':
+        if self.a == 'BTC':
             p_val = 0.20
             self.conversion_rate = round((r.json()[self.b][tsyms] / p_val),8)
         else:
@@ -33,7 +33,7 @@ class Conversion:
                    'persona-t': 'kapu',
                    'lwf-t': 'xrp',
                    'shift-t': 'shift',
-                   'persona': 'kapu'}
+                   'persona': 'btc'}
         
         if a in test.keys():
             return test[a].upper()
