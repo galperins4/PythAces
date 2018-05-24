@@ -107,7 +107,8 @@ def contract_to_json(c):
          "contractStatus":c[7],
          "processedOnTimestamp":c[10],
          "channel": c[8],
-         "coin": c[9]}
+         "coin": c[9],
+         "serviceAccount": coin['channel']['service_acct']}
     
     return convert
 
