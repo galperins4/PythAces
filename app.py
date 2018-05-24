@@ -51,7 +51,6 @@ def crypto(convCoin):
             
             qr_dict={"success":True,"channel":channel,"address":address,"amount":amt, "vendorField":vendorfield, "receive":(amount/atomic)} 
             #return json to client (address, amount, vendorfield)
-            print(qr_dict)
             return jsonify(qr_dict)
 
         else:
