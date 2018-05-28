@@ -21,7 +21,7 @@ class Conversion:
         if self.a == 'PERSONA' and self.b == 'ARK':
             p_val = 0.20
             a_val = 2.40
-            self.conversion_rate = round(a_val / p_val),8)
+            self.conversion_rate = round((a_val / p_val),8)
         else:
             self.conversion_rate = round((r.json()[self.b][tsyms] / r.json()[self.a][tsyms]),8)
         
