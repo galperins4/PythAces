@@ -17,10 +17,11 @@ class Conversion:
         
         r = requests.get(url, params=params)
         
-        #hard code for persona
-        if self.a == 'BTC':
+        #hard code for persona and ark test site
+        if self.a == 'PERSONA' and self.b == 'ARK':
             p_val = 0.20
-            self.conversion_rate = round((r.json()[self.b][tsyms] / p_val),8)
+            a_val = 2.40
+            self.conversion_rate = round(a_val / p_val),8)
         else:
             self.conversion_rate = round((r.json()[self.b][tsyms] / r.json()[self.a][tsyms]),8)
         
@@ -32,8 +33,7 @@ class Conversion:
                    'dark': 'ark',
                    'persona-t': 'kapu',
                    'lwf-t': 'xrp',
-                   'shift-t': 'shift',
-                   'persona': 'btc'}
+                   'shift-t': 'shift'}
         
         if a in test.keys():
             return test[a].upper()
