@@ -81,7 +81,7 @@ def prices():
                 #conversion_rates[key] = cnv.conversion_rate()
                 #API Test
                 try:
-                    if channel == "prs":
+                    if channel == "persona":
                         url = "http://80.240.20.236:3033/api/prs-ark"
                     elif channel == "ark":
                         url = "http://80.240.20.236:3033/api/ark-prs"
