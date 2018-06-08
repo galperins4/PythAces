@@ -82,9 +82,9 @@ def prices():
                 #API Test
                 try:
                     if channel == "persona":
-                        url = "http://80.240.20.236:3033/api/prs-ark"
-                    elif channel == "ark":
                         url = "http://80.240.20.236:3033/api/ark-prs"
+                    elif channel == "ark":
+                        url = "http://80.240.20.236:3033/api/prs-ark"
                         
                     r = requests.get(url)
                     conversion_rates[key] = r.json()['price']
