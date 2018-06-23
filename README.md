@@ -4,6 +4,7 @@
 
 ```sh
 install and sync relay server
+apt install python3-pip
 git clone https://github.com/galperins4/PythAces 
 cd ~/PythAces/config
 update configs (see below)
