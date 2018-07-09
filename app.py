@@ -222,14 +222,10 @@ def validate_addresses(c, a_addr, b_addr):
 if __name__ == "__main__":
     # get config data
     network, coin = parse_config()
-
-    # check for new rewards accounts to initialize if any changed
-    #acesdb = AceDB(coin['channel']['dbusername'])
     
     #initialize park objects for use
     fx_coins = {}
     for key in coin:
         if key != "channel":
             fx_coins[key] = get_network(key, network, coin[key]['relay_ip'])
-    #app.run()
     app.run(threaded=True)
