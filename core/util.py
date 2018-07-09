@@ -54,7 +54,7 @@ def get_coin(addr, coin):
     return n
 
 def is_ark_fork(c):
-    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t', 'persona']
+    ark_fork = ['ark','dark','kapu', 'dkapu', 'persona-t', 'persona', 'ripa']
     if c in ark_fork:
         return True
     else:
