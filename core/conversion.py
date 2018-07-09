@@ -23,7 +23,7 @@ class Conversion:
             if self.a == 'RIPA':
                 self.conversion_rate = round((r.json()[self.b][tsyms] / temp_val),8)
             else:
-                self.conversion_rate = round(temp_val / r.json()[self.a][tsyms]),8)
+                self.conversion_rate = round((temp_val / r.json()[self.a][tsyms]),8)
         else:
             self.conversion_rate = round((r.json()[self.b][tsyms] / r.json()[self.a][tsyms]),8)
         
