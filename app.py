@@ -77,20 +77,8 @@ def prices():
         # get conversion rates
         for key in coin:
             if key != "channel":
-                #cnv = Conversion(coin['channel']['channel'], key)
-                #conversion_rates[key] = cnv.conversion_rate()
-                #API Test
-                try:
-                    if channel == "persona":
-                        url = "http://80.240.20.236:3033/api/ark-prs"
-                    elif channel == "ark":
-                        url = "http://80.240.20.236:3033/api/prs-ark"
-                        
-                    r = requests.get(url)
-                    conversion_rates[key] = r.json()['price']
-                except Exception as e:
-                    print(e)
-                    conversion_rates[key] = 0
+                cnv = Conversion(coin['channel']['channel'], key)
+                conversion_rates[key] = cnv.conversion_rate(
                 
         # get fees	
         feeDict = {
