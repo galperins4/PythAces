@@ -78,7 +78,7 @@ def prices():
         for key in coin:
             if key != "channel":
                 cnv = Conversion(coin['channel']['channel'], key)
-                conversion_rates[key] = cnv.conversion_rate(
+                conversion_rates[key] = cnv.conversion_rate()
                 
         # get fees	
         feeDict = {
