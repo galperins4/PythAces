@@ -1,6 +1,4 @@
-https://github.com/faustbrian/ARK-Python-Client/archive/master.zip
-
-setuptools==20.7.0
+https://github.com/galperins4/ARK-Python/archive/master.zip
 psycopg2-binary==2.7.4
 flask==0.12.2
 flask_cors==3.0.3
