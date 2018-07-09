@@ -17,11 +17,13 @@ class Conversion:
         
         r = requests.get(url, params=params)
         
-        #hard code for persona and ark test site
-        if self.a == 'PERSONA' and self.b == 'ARK':
-            p_val = 0.20
-            a_val = 2.40
-            self.conversion_rate = round((a_val / p_val),8)
+        #hard code RIPA until exchange
+        if self.a == 'RIPA' or self.b == 'RIPA':
+            temp_val = 0.05
+            if self.a == 'RIPA':
+                self.conversion_rate = round((r.json()[self.b][tsyms] / temp_val),8)
+            else:
+                self.conversion_rate = round(temp_val / r.json()[self.a][tsyms]),8)
         else:
             self.conversion_rate = round((r.json()[self.b][tsyms] / r.json()[self.a][tsyms]),8)
         
@@ -34,7 +36,7 @@ class Conversion:
                    'persona-t': 'kapu',
                    'lwf-t': 'xrp',
                    'shift-t': 'shift',
-                   'ripa':'ripa'}
+                   'ripa':'xrp'}
         
         if a in test.keys():
             return test[a].upper()
