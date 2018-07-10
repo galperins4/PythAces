@@ -36,7 +36,7 @@ class Conversion:
                    'persona-t': 'kapu',
                    'lwf-t': 'xrp',
                    'shift-t': 'shift',
-                   'ripa':'eos'}
+                   'ripa':'ruff'}
         
         if a in test.keys():
             return test[a].upper()
