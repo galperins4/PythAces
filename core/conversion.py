@@ -18,9 +18,9 @@ class Conversion:
         r = requests.get(url, params=params)
         
         #hard code RIPA until exchange
-        if self.a == 'RIPA' or self.b == 'RIPA':
+        if self.a == 'EOS' or self.b == 'EOS':
             temp_val = 0.05
-            if self.a == 'RIPA':
+            if self.a == 'EOS':
                 self.conversion_rate = round((r.json()[self.b][tsyms] / temp_val),8)
             else:
                 self.conversion_rate = round((temp_val / r.json()[self.a][tsyms]),8)
