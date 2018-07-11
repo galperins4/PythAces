@@ -23,7 +23,6 @@ def crypto(convCoin):
         send = req_data['send']
         receive = req_data["receive"]
         amount = req_data["amount"]*atomic
-        print("receive amt", amount)
         # do validations
         c1, c1_msg = validate_addresses(convCoin,send,receive)
         c2, c2_msg = validate_amount(convCoin,amount)
@@ -39,7 +38,6 @@ def crypto(convCoin):
 
             c = Contract()
             send_amount, total_fee = c.pricing(channel,convCoin, amount, f)
-            print("calc send amt", send_amount)
 
             ts = int(time.time())
     
@@ -176,7 +174,6 @@ def validate_amount(c,amount):
     r = requests.get(url)
     avail_cap = r.json()[c]["availableCapacity"] - atomic
     
-    print("amt", amount, "capacity", avail_cap)
     limit = 100*atomic
     if amount <= limit:
         if amount < avail_cap:
