@@ -175,7 +175,8 @@ def validate_amount(c,amount):
     url = "http://"+coin['channel']['channel_ip']+"/api/capacity"
     r = requests.get(url)
     avail_cap = r.json()[c]["availableCapacity"] - atomic
-
+    
+    print("amt", amount, "capacity", avail_cap)
     limit = 100*atomic
     if amount <= limit:
         if amount < avail_cap:
