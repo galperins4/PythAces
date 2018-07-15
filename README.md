@@ -9,7 +9,7 @@ git clone https://github.com/galperins4/PythAces
 cd ~/PythAces/config
 update configs (see below)
 cd ~/PythAces
-bash install_beta.sh
+bash install.sh
 ```
 
 ## Configuration & Usage 
